@@ -43,6 +43,7 @@ const works = [
     description: '機能訴求の情報設計とホワイトペーパ導線を設計。',
   },
 ];
+const NOTE_RSS_URL = 'https://note.com/hiroyuki_maekawa/rss/';
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -70,6 +71,77 @@ function renderFeaturedWorks() {
                 : ''
             }
           </div>
+        </article>
+      `,
+    )
+    .join('');
+}
+
+function parseRssItems(xmlText) {
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(xmlText, 'application/xml');
+  return [...xml.querySelectorAll('item')].map((item) => {
+    const title = item.querySelector('title')?.textContent?.trim() || 'タイトル未設定';
+    const link = item.querySelector('link')?.textContent?.trim() || '';
+    const pubDate = item.querySelector('pubDate')?.textContent?.trim() || '';
+    return { title, link, pubDate };
+  });
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString || 'DATE';
+  return date.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+}
+
+async function fetchNoteRss() {
+  const endpoints = [
+    NOTE_RSS_URL,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(NOTE_RSS_URL)}`,
+  ];
+
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint, { headers: { Accept: 'application/rss+xml, application/xml, text/xml' } });
+      if (!response.ok) continue;
+      const text = await response.text();
+      const items = parseRssItems(text);
+      if (items.length > 0) return items;
+    } catch (_error) {
+      // Try next endpoint.
+    }
+  }
+  return [];
+}
+
+async function renderNews() {
+  const host = $('#news-list');
+  if (!host) return;
+
+  host.innerHTML = '<article class="news-item"><p class="news-title">記事を読み込み中...</p></article>';
+  const items = await fetchNoteRss();
+
+  if (!items.length) {
+    host.innerHTML = `
+      <article class="news-item">
+        <p class="news-title">記事を取得できませんでした。最新情報はnoteをご確認ください。</p>
+      </article>
+    `;
+    return;
+  }
+
+  host.innerHTML = items
+    .slice(0, 5)
+    .map(
+      (item) => `
+        <article class="news-item">
+          <p class="news-date">${formatDate(item.pubDate)}</p>
+          <h3 class="news-title">${item.title}</h3>
+          <a class="news-link" href="${item.link}" target="_blank" rel="noopener noreferrer">記事を読む</a>
         </article>
       `,
     )
@@ -163,6 +235,7 @@ function setupProfileImage() {
 
 function init() {
   renderFeaturedWorks();
+  renderNews();
   setupHeader();
   setupRevealAnimations();
   setupSectionTracker();

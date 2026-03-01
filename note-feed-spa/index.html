@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>note Feed Cards</title>
+    <style>
+      :root {
+        --bg: #f6f7f8;
+        --card: #ffffff;
+        --text: #1f252d;
+        --muted: #7b8591;
+        --line: #e8ebee;
+        --shadow: 0 8px 22px rgba(20, 28, 38, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .wrap {
+        width: min(1120px, calc(100vw - 32px));
+        margin: 40px auto 56px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.4rem, 2.6vw, 2rem);
+        letter-spacing: 0.01em;
+      }
+
+      .sub {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .status {
+        margin: 20px 0 6px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        display: block;
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--card);
+        border: 1px solid var(--line);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+      }
+
+      .thumb {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #dde2e8;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        color: #6f7882;
+        font-size: 0.86rem;
+      }
+
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .body {
+        padding: 12px 12px 14px;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .date {
+        margin: 9px 0 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .wrap {
+          margin-top: 26px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>note 最新記事</h1>
+      <p class="sub" id="feed-info"></p>
+      <p class="status" id="status">記事を取得しています...</p>
+      <section class="grid" id="cards"></section>
+    </main>
+
+    <script>
+      const NOTE_ID = 'YOUR_ID';
+      const FEED_URL = `https://note.com/${NOTE_ID}/rss`;
+      const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}`;
+
+      const statusEl = document.getElementById('status');
+      const cardsEl = document.getElementById('cards');
+      const feedInfoEl = document.getElementById('feed-info');
+
+      function formatDate(input) {
+        const date = new Date(input);
+        if (Number.isNaN(date.getTime())) return '';
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}/${m}/${d}`;
+      }
+
+      function extractFirstImageSrc(htmlText) {
+        if (!htmlText) return '';
+        const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+        const img = doc.querySelector('img');
+        return img ? img.getAttribute('src') || '' : '';
+      }
+
+      function createCard(item) {
+        const imageSrc = extractFirstImageSrc(item.description);
+        const date = formatDate(item.pubDate);
+
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = item.link;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+
+        const thumb = document.createElement('div');
+        thumb.className = 'thumb';
+
+        if (imageSrc) {
+          const img = document.createElement('img');
+          img.src = imageSrc;
+          img.alt = item.title || 'note article image';
+          img.loading = 'lazy';
+          thumb.appendChild(img);
+        } else {
+          thumb.textContent = 'No Image';
+        }
+
+        const body = document.createElement('div');
+        body.className = 'body';
+
+        const title = document.createElement('h2');
+        title.className = 'title';
+        title.textContent = item.title || '(タイトルなし)';
+
+        const dateEl = document.createElement('p');
+        dateEl.className = 'date';
+        dateEl.textContent = date;
+
+        body.appendChild(title);
+        body.appendChild(dateEl);
+        card.appendChild(thumb);
+        card.appendChild(body);
+        return card;
+      }
+
+      async function loadFeed() {
+        try {
+          if (NOTE_ID === 'YOUR_ID') {
+            statusEl.textContent = 'NOTE_ID をあなたの note ID に変更してください。';
+            return;
+          }
+
+          const response = await fetch(API_URL);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const data = await response.json();
+          if (data.status !== 'ok' || !Array.isArray(data.items)) {
+            throw new Error('Invalid API response');
+          }
+
+          feedInfoEl.textContent = `${data.feed.title || NOTE_ID} の最新記事`;
+
+          const items = data.items.slice(0, 12);
+          cardsEl.innerHTML = '';
+
+          items.forEach((item) => {
+            cardsEl.appendChild(createCard(item));
+          });
+
+          statusEl.textContent = items.length
+            ? `${items.length}件の記事を表示しています。`
+            : '記事が見つかりませんでした。';
+        } catch (error) {
+          statusEl.textContent = '記事の取得に失敗しました。時間をおいて再読み込みしてください。';
+          console.error(error);
+        }
+      }
+
+      loadFeed();
+    </script>
+  </body>
+</html>
