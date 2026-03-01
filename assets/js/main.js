@@ -1,5 +1,13 @@
 const works = [
   {
+    slug: 'finance-app',
+    title: '家計簿アプリ',
+    year: '2026',
+    date: '2026-03-01',
+    description: '日々の収支を管理できる家計簿Webアプリ。',
+    url: 'https://finance-gray-gamma.vercel.app/',
+  },
+  {
     slug: 'law-firm-site',
     title: '士業コーポレートサイト',
     year: '2026',
@@ -56,6 +64,11 @@ function renderFeaturedWorks() {
             <p class="work-year">${work.year}</p>
             <h3 class="work-title">${work.title}</h3>
             <p class="work-desc">${work.description}</p>
+            ${
+              work.url
+                ? `<p class="work-link-wrap"><a class="work-link" href="${work.url}" target="_blank" rel="noopener noreferrer">サイトを見る</a></p>`
+                : ''
+            }
           </div>
         </article>
       `,
@@ -136,11 +149,24 @@ function setupSectionTracker() {
   sections.forEach((section) => observer.observe(section));
 }
 
+function setupProfileImage() {
+  const profileImage = $('#profile-image');
+  const frame = document.querySelector('.profile-photo');
+  if (!(profileImage instanceof HTMLImageElement) || !frame) return;
+
+  const fixedSrc = '/assets/img/profile.JPG';
+  profileImage.onload = () => {
+    frame.classList.add('has-image');
+  };
+  profileImage.src = fixedSrc;
+}
+
 function init() {
   renderFeaturedWorks();
   setupHeader();
   setupRevealAnimations();
   setupSectionTracker();
+  setupProfileImage();
 }
 
 init();

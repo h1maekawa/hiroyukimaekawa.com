@@ -1,5 +1,12 @@
 const works = [
   {
+    title: '家計簿アプリ',
+    year: '2026',
+    date: '2026-03-01',
+    description: '日々の収支を管理できる家計簿Webアプリ。',
+    url: 'https://finance-gray-gamma.vercel.app/',
+  },
+  {
     title: '士業コーポレートサイト',
     year: '2026',
     date: '2026-02-10',
@@ -44,6 +51,11 @@ if (host) {
             <p class="work-year">${work.year}</p>
             <h3 class="work-title">${work.title}</h3>
             <p class="work-desc">${work.description}</p>
+            ${
+              work.url
+                ? `<p class="work-link-wrap"><a class="work-link" href="${work.url}" target="_blank" rel="noopener noreferrer">サイトを見る</a></p>`
+                : ''
+            }
           </div>
         </article>
       `,
