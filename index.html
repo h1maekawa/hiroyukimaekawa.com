@@ -1,15 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAEKAWA STUDIO | AI活用・HP制作</title>
+    <meta
+      name="description"
+      content="AI活用とHP制作で事業成果をつくる。設計・実装・公開後の改善運用まで一気通貫で対応します。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb--mint" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb--sand" aria-hidden="true"></div>
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Create Hiroyuki Maekawa Portfolio</title>
-    </head>
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top">MAEKAWA STUDIO</a>
+        <button class="menu-toggle" type="button" aria-label="メニュー" aria-expanded="false">MENU</button>
+        <nav class="site-nav" data-nav>
+          <a href="#services">SERVICE</a>
+          <a href="#flow">FLOW</a>
+          <a href="#works">WORKS</a>
+          <a href="#contact">CONTACT</a>
+        </nav>
+      </div>
+    </header>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <main>
+      <section class="hero section">
+        <div class="container">
+          <p class="hero-chip reveal">AI & WEBSITE STUDIO</p>
+          <h1 class="hero-title reveal">
+            事業の成果に直結する<br />
+            AI活用とHP制作を。
+          </h1>
+          <div class="hero-grid reveal">
+            <p class="hero-copy">
+              ただ見た目がきれいなだけのサイトではなく、問い合わせ・採用・売上などの目標に合わせて設計。
+              AI導入支援から公開後の運用改善まで、実務で使える形で伴走します。
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">無料相談する</a>
+              <a class="btn btn-ghost" href="#works">実績を見る</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-index">01</p>
+            <h2>Services</h2>
+            <p class="section-sub">提供内容</p>
+          </div>
+          <div class="card-grid" id="service-grid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="flow">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-index">02</p>
+            <h2>Workflow</h2>
+            <p class="section-sub">制作フロー</p>
+          </div>
+          <ol class="flow-list" id="flow-list"></ol>
+        </div>
+      </section>
+
+      <section class="section" id="works">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-index">03</p>
+            <h2>Case Studies</h2>
+            <p class="section-sub">導入実績</p>
+          </div>
+          <div class="case-list" id="case-list"></div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="contact-box reveal">
+            <p class="section-index">CONTACT</p>
+            <h2>
+              AI導入やHP制作の相談を、<br />
+              まずは30分で整理しませんか。
+            </h2>
+            <p>
+              課題が明確でなくても問題ありません。現状を聞かせていただき、優先順位と最短ルートを提案します。
+            </p>
+            <a class="btn btn-light" href="mailto:maekawa.hiroyuki@example.com">メールで問い合わせる</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <p class="section-index">MAEKAWA STUDIO</p>
+          <p class="footer-copy">AI活用とHP制作で、成果をつくる。</p>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:maekawa.hiroyuki@example.com">maekawa.hiroyuki@example.com</a>
+          <a href="#contact">相談フォームへ</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© 2026 MAEKAWA STUDIO</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
