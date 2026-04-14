@@ -1,135 +1,217 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hiroyuki Maekawa | AI活用・HP制作</title>
-    <meta
-      name="description"
-      content="Hiroyuki Maekawaのポートフォリオ。AI活用とHP制作を軸に、成果につながるWeb制作を提供します。"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-  </head>
-  <body>
-    <aside class="side-indicator" aria-label="現在のセクション">
-      <p id="side-label">HOME</p>
-    </aside>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIROYUKI MAEKAWA | Web Director & AI Integrator</title>
+    <meta name="description" content="Hiroyuki Maekawaのポートフォリオ。AI活用とHP制作を軸に、成果につながるWeb制作を提供します。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
 
-    <header class="site-header" id="top">
-      <div class="container header-inner">
-        <a class="brand" href="#home">HIROYUKI<br />MAEKAWA</a>
-        <button class="menu-toggle" type="button" aria-label="メニュー" aria-expanded="false">MENU</button>
-        <nav class="site-nav" data-nav>
-          <a href="#home" data-nav-id="home">HOME</a>
-          <a href="#profile" data-nav-id="profile">PROFILE</a>
-          <a href="#works" data-nav-id="works">WORKS</a>
-          <a href="#news" data-nav-id="news">NEWS</a>
-          <a href="#contact" data-nav-id="contact">CONTACT</a>
-        </nav>
-      </div>
-    </header>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="noise-overlay"></div>
 
-    <main>
-      <section class="hero section section-track" id="home" data-section="HOME">
-        <div class="hero-noise" aria-hidden="true"></div>
-        <div class="container hero-frame reveal">
-          <div class="hero-visual">
-            <h1 class="hero-word hero-word--one">HIROYUKI</h1>
-            <h1 class="hero-word hero-word--two">MAEKAWA</h1>
-            <div class="hero-peach" aria-hidden="true">
-              <div class="hero-peach-ring hero-peach-ring--one"></div>
-              <div class="hero-peach-ring hero-peach-ring--two"></div>
-              <div class="hero-peach-dot"></div>
-            </div>
-          </div>
-          <p class="hero-copy">
-            AI活用とHP制作を組み合わせ、問い合わせ・採用・売上につながるWebを設計します。
-          </p>
-        </div>
-      </section>
+<!-- Nav -->
+<nav>
+    <a href="#" class="nav-logo">H<span>.</span>M</a>
+    <ul class="nav-links" data-nav>
+        <li><a href="#works" data-nav-id="works">Works</a></li>
+        <li><a href="#about" data-nav-id="about">About</a></li>
+        <li><a href="#news" data-nav-id="news">News</a></li>
+        <li><a href="#contact" data-nav-id="contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">MENU</button>
+</nav>
 
-      <section class="section section-track profile-section" id="profile" data-section="PROFILE">
-        <div class="container">
-          <div class="profile-panel reveal">
-            <div class="profile-info">
+<!-- Hero -->
+<section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-vertical">前川 弘行 — Developer & Creator</div>
+
+    <div class="hero-content">
+        <div class="hero-tag">Web Director & AI Integrator</div>
+        <h1 class="hero-title">
+            <div>HIRO</div>
+            <div class="outline">YUKI</div>
+            <div class="accent">MAEKAWA</div>
+        </h1>
+        <p class="hero-sub">
+            AI活用とHP制作を組み合わせ、<br>
+            問い合わせ・採用・売上につながるWebを設計します。<br>
+            構成設計から実装・改善運用まで一貫して対応します。
+        </p>
+    </div>
+
+    <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        Scroll
+    </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <div class="marquee-item">Web Design<span>◆</span></div>
+        <div class="marquee-item">AI Integration<span>◆</span></div>
+        <div class="marquee-item">UI / UX Design<span>◆</span></div>
+        <div class="marquee-item">Productivity Tools<span>◆</span></div>
+        <div class="marquee-item">Web Development<span>◆</span></div>
+        <div class="marquee-item">前川 弘行<span>◆</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-item">Web Design<span>◆</span></div>
+        <div class="marquee-item">AI Integration<span>◆</span></div>
+        <div class="marquee-item">UI / UX Design<span>◆</span></div>
+        <div class="marquee-item">Productivity Tools<span>◆</span></div>
+        <div class="marquee-item">Web Development<span>◆</span></div>
+        <div class="marquee-item">前川 弘行<span>◆</span></div>
+    </div>
+</div>
+
+<!-- Profile -->
+<section class="section section-track profile-section fade-up" id="profile" data-section="PROFILE">
+    <div class="container">
+      <div class="profile-panel">
+        <div class="profile-info">
+          <p class="profile-num">01</p>
+          <div class="profile-names">
               <p class="profile-ja">前川 弘行</p>
               <p class="profile-en">HIROYUKI MAEKAWA</p>
-              <p class="profile-meta">Web Director / Web Designer / AI Integrator</p>
-              <p class="profile-meta">Tokyo, Japan</p>
-              <p class="profile-text">
-                事業成果につながるHP制作と、業務に定着するAI導入支援を行っています。
-                構成設計・デザイン・実装・改善運用まで一貫して対応します。
-              </p>
-            </div>
-            <figure class="profile-figure">
-              <div class="profile-photo">
-                <img
-                  id="profile-image"
-                  class="profile-photo-img"
-                  src="/assets/img/profile.JPG"
-                  alt="前川弘行のプロフィール写真"
-                />
-              </div>
-            </figure>
           </div>
+          <p class="profile-meta">Web Director / Web Designer / AI Integrator</p>
+          <p class="profile-meta">Tokyo, Japan</p>
+          <div class="profile-divider"></div>
+          <p class="profile-text">
+            事業成果につながるHP制作と、業務に定着するAI導入支援を行っています。<br>
+            構成設計・デザイン・実装・改善運用まで一貫して対応します。
+          </p>
         </div>
-      </section>
-
-      <section class="section section-track" id="works" data-section="WORKS">
-        <div class="container">
-          <div class="section-head reveal">
-            <p class="section-index">02</p>
-            <h2>Works</h2>
+        <figure class="profile-figure">
+          <div class="profile-photo">
+            <img
+              id="profile-image"
+              class="profile-photo-img"
+              src="/assets/img/profile.JPG"
+              alt="前川弘行のプロフィール写真"
+            />
           </div>
-          <div class="works-grid" id="featured-works"></div>
-          <div class="works-more-wrap reveal">
-            <a class="btn btn-ghost" href="/works.html">MORE WORKS</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-track" id="news" data-section="NEWS">
-        <div class="container">
-          <div class="section-head reveal">
-            <p class="section-index">03</p>
-            <h2>News</h2>
-          </div>
-          <div class="news-list reveal" id="news-list"></div>
-          <div class="works-more-wrap reveal">
-            <a class="btn btn-ghost" href="https://note.com/hiroyuki_maekawa" target="_blank" rel="noopener noreferrer">
-              NOTEを見る
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-track" id="contact" data-section="CONTACT">
-        <div class="container">
-          <div class="contact-box reveal">
-            <p class="section-index">04</p>
-            <h2>Contact</h2>
-            <p>
-              ご相談はメールからお願いします。課題整理の段階でも問題ありません。
-            </p>
-            <a class="btn btn-light" href="mailto:maekawa.hiroyuki@example.com">maekawa.hiroyuki@example.com</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer section-track" data-section="FOOTER">
-      <div class="container footer-inner">
-        <p>© 2026 HIROYUKI MAEKAWA</p>
-        <a href="#home">TOPへ戻る</a>
+        </figure>
       </div>
-    </footer>
+    </div>
+</section>
 
-    <script type="module" src="/assets/js/main.js"></script>
-  </body>
+<!-- Works -->
+<section class="works fade-up" id="works">
+    <div class="section-label">Selected Works</div>
+    <div class="works-grid" id="featured-works">
+        <!-- Dynamically populated by main.js -->
+    </div>
+    <div style="margin-top: 4rem; text-align: center;">
+        <a href="/works.html" class="contact-link">All Works →</a>
+    </div>
+</section>
+
+<!-- About -->
+<section class="about fade-up" id="about">
+    <div class="section-label">About Me</div>
+    <div class="about-grid">
+        <div>
+            <h2 class="about-heading">
+                Building tools<br>
+                people <em>actually</em><br>
+                want to use.
+            </h2>
+            <p class="about-text">
+                事業成果につながるHP制作と、業務に定着するAI導入支援を行っています。構成設計・デザイン・実装・改善運用まで一貫して対応します。
+            </p>
+            <p class="about-text">
+                コードを書くこと以上に、「使う人の体験」を大切にしています。シンプルで直感的、それでいてパワフルなツールを目指しています。
+            </p>
+            <div class="about-interests">
+                <div class="interest">
+                    <div class="interest-icon">🌊</div>
+                    <div class="interest-label">Ocean</div>
+                </div>
+                <div class="interest">
+                    <div class="interest-icon">🐈</div>
+                    <div class="interest-label">Cats</div>
+                </div>
+                <div class="interest">
+                    <div class="interest-icon">💻</div>
+                    <div class="interest-label">Coding</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-list">
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Frontend / React · Vue</span>
+                    <span class="skill-val">90%</span>
+                </div>
+                <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Backend / Node · Supabase</span>
+                    <span class="skill-val">75%</span>
+                </div>
+                <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">UI/UX Design</span>
+                    <span class="skill-val">80%</span>
+                </div>
+                <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">AI Implementation</span>
+                    <span class="skill-val">85%</span>
+                </div>
+                <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News -->
+<section class="news fade-up" id="news">
+    <div class="section-label">Latest News</div>
+    <div class="news-list" id="news-list">
+        <!-- Dynamically populated by main.js from note.com RSS -->
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact fade-up" id="contact">
+    <div class="contact-inner">
+        <h2 class="contact-heading">
+            Let's<br>
+            <span class="outline">Work</span><br>
+            Together.
+        </h2>
+        <p class="contact-text">
+            HP制作、AI導入支援、プロダクト開発のご相談など、<br>
+            お気軽にお問い合わせください。
+        </p>
+        <a href="mailto:maekawa.hiroyuki@example.com" class="contact-link">
+            maekawa.hiroyuki@example.com →
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <span class="footer-name">Hiroyuki Maekawa — 前川 弘行</span>
+    <span class="footer-copy">© 2026 All rights reserved</span>
+</footer>
+
+<script type="module" src="/assets/js/main.js"></script>
+</body>
 </html>

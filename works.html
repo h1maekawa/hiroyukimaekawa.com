@@ -1,44 +1,77 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Works | Hiroyuki Maekawa</title>
-    <meta name="description" content="Hiroyuki Maekawaの制作実績一覧" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-  </head>
-  <body>
-    <header class="site-header works-header">
-      <div class="container header-inner">
-        <a class="brand" href="/index.html#home">HIROYUKI<br />MAEKAWA</a>
-        <nav class="site-nav static-nav">
-          <a href="/index.html#home">HOME</a>
-          <a href="/index.html#works" class="is-active">WORKS</a>
-        </nav>
-      </div>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | HIROYUKI MAEKAWA</title>
+    <meta name="description" content="Hiroyuki Maekawaの制作実績一覧">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <style>
+        .works-page { padding-top: 10rem; }
+    </style>
+</head>
+<body>
 
-    <main class="works-page">
-      <section class="section">
-        <div class="container">
-          <div class="section-head reveal is-visible">
-            <p class="section-index">WORKS LIST</p>
-            <h2>All Works</h2>
-          </div>
-          <div class="works-grid" id="all-works"></div>
-          <div class="works-more-wrap reveal is-visible">
-            <a class="btn btn-ghost" href="/index.html#works">HOMEへ戻る</a>
-          </div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="noise-overlay"></div>
+
+<!-- Nav -->
+<nav>
+    <a href="/index.html#home" class="nav-logo">H<span>.</span>M</a>
+    <ul class="nav-links">
+        <li><a href="/index.html#home">Home</a></li>
+        <li><a href="/index.html#works" class="is-active">Works</a></li>
+    </ul>
+</nav>
+
+<main class="works-page">
+    <section class="works fade-up">
+        <div class="section-label">Showcase</div>
+        <h1 class="about-heading" style="margin-bottom: 4rem;">All <em>Works</em></h1>
+        <div class="works-grid" id="all-works">
+            <!-- Dynamically populated by works.js -->
         </div>
-      </section>
-    </main>
+        <div style="margin-top: 6rem; text-align: center;">
+            <a href="/index.html#home" class="contact-link">← Back Home</a>
+        </div>
+    </section>
+</main>
 
-    <script type="module" src="/assets/js/works.js"></script>
-  </body>
+<footer>
+    <span class="footer-name">Hiroyuki Maekawa — 前川 弘行</span>
+    <span class="footer-copy">© 2026 All rights reserved</span>
+</footer>
+
+<script type="module" src="/assets/js/works.js"></script>
+<script>
+    // Simplified cursor for works page
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let cx = 0, cy = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+        cx = e.clientX; cy = e.clientY;
+        cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px';
+    });
+    function animRing() {
+        rx += (cx - rx) * 0.12; ry += (cy - ry) * 0.12;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(animRing);
+    }
+    animRing();
+    document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+        el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+    });
+    
+    // Simple intersection observer for works page
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
 </html>

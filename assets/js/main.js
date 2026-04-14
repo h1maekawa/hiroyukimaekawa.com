@@ -1,245 +1,262 @@
 const works = [
   {
     slug: 'finance-app',
-    title: '家計簿アプリ',
+    title: 'Kakeibo',
+    subtitle: '家計簿アプリ',
     year: '2026',
     date: '2026-03-01',
-    description: '日々の収支を管理できる家計簿Webアプリ。',
+    description: 'シンプルで美しい収支管理アプリ。カテゴリ分析、予算設定機能を搭載。',
     url: 'https://finance-gray-gamma.vercel.app/',
+    icon: '💰',
+    tags: ['React', 'Supabase', 'Chart.js'],
   },
   {
     slug: 'law-firm-site',
-    title: '士業コーポレートサイト',
+    title: 'DocGen',
+    subtitle: '士業コーポレートサイト',
     year: '2026',
     date: '2026-02-10',
     description: '検索導線とお問い合わせ導線を再設計し、CV率改善を実施。',
+    icon: '📄',
+    tags: ['Next.js', 'Vercel'],
   },
   {
     slug: 'school-lp',
-    title: 'スクール事業LP',
+    title: 'Academy LP',
+    subtitle: 'スクール事業LP',
     year: '2026',
     date: '2026-01-25',
     description: '講座案内の情報整理と申込導線の最適化を担当。',
+    icon: '🎓',
+    tags: ['HTML/CSS', 'JavaScript'],
   },
   {
     slug: 'clinic-web-renewal',
-    title: 'クリニックサイトリニューアル',
+    title: 'Clinic Web',
+    subtitle: 'クリニックサイトリニューアル',
     year: '2025',
     date: '2025-12-18',
     description: 'スマホUXを中心に、予約までの離脱ポイントを改善。',
+    icon: '🏥',
+    tags: ['WordPress', 'SEO'],
   },
   {
     slug: 'ecommerce-brand',
-    title: 'D2Cブランドサイト',
+    title: 'Brand Store',
+    subtitle: 'D2Cブランドサイト',
     year: '2025',
     date: '2025-10-03',
     description: 'ブランド表現と購入導線を両立したECフロントを構築。',
+    icon: '🛍️',
+    tags: ['Shopify', 'Liquid'],
   },
   {
     slug: 'saas-site',
-    title: 'SaaSサービスサイト',
+    title: 'Service Portal',
+    subtitle: 'SaaSサービスサイト',
     year: '2025',
     date: '2025-07-21',
     description: '機能訴求の情報設計とホワイトペーパ導線を設計。',
+    icon: '⚙️',
+    tags: ['Vue.js', 'Firebase'],
   },
 ];
+
 const NOTE_RSS_URL = 'https://note.com/hiroyuki_maekawa/rss/';
 
 const $ = (selector) => document.querySelector(selector);
 
-function sortedWorks() {
-  return [...works].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+// Custom cursor logic
+function setupCursor() {
+  const cursor = $('#cursor');
+  const ring = $('#cursorRing');
+  if (!cursor || !ring) return;
+
+  let cx = 0, cy = 0, rx = 0, ry = 0;
+  
+  document.addEventListener('mousemove', e => {
+    cx = e.clientX; 
+    cy = e.clientY;
+    cursor.style.left = cx + 'px'; 
+    cursor.style.top = cy + 'px';
+  });
+
+  function animRing() {
+    rx += (cx - rx) * 0.12;
+    ry += (cy - ry) * 0.12;
+    ring.style.left = rx + 'px'; 
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => { 
+      cursor.classList.add('hover'); 
+      ring.classList.add('hover'); 
+    });
+    el.addEventListener('mouseleave', () => { 
+      cursor.classList.remove('hover'); 
+      ring.classList.remove('hover'); 
+    });
+  });
 }
 
+// Render Works with dynamic sizes
 function renderFeaturedWorks() {
   const host = $('#featured-works');
   if (!host) return;
 
-  host.innerHTML = sortedWorks()
-    .slice(0, 3)
-    .map(
-      (work) => `
-        <article class="work-card reveal">
-          <div class="work-thumb" aria-hidden="true"></div>
-          <div class="work-body">
-            <p class="work-year">${work.year}</p>
-            <h3 class="work-title">${work.title}</h3>
-            <p class="work-desc">${work.description}</p>
-            ${
-              work.url
-                ? `<p class="work-link-wrap"><a class="work-link" href="${work.url}" target="_blank" rel="noopener noreferrer">サイトを見る</a></p>`
-                : ''
-            }
+  const sorted = [...works].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  
+  host.innerHTML = sorted
+    .slice(0, 6)
+    .map((work, index) => {
+      const num = String(index + 1).padStart(2, '0');
+      const thumbUrl = `https://images.unsplash.com/photo-${index + 1500000000000}?auto=format&fit=crop&q=80&w=800`; // Placeholder logic
+      
+      return `
+        <a href="${work.url || '#'}" class="work-card fade-up">
+          <div class="work-thumb">
+            <img src="${thumbUrl}" alt="${work.title}" onerror="this.src='https://placehold.co/600x600/1a1d25/a8d8e8?text=${encodeURIComponent(work.title)}'">
           </div>
-        </article>
-      `,
-    )
+          <div class="work-body">
+            <span class="work-num">Service ${num}</span>
+            <h3 class="work-title">${work.title}</h3>
+          </div>
+        </a>
+      `;
+    })
     .join('');
 }
 
-function parseRssItems(xmlText) {
-  const parser = new DOMParser();
-  const xml = parser.parseFromString(xmlText, 'application/xml');
-  return [...xml.querySelectorAll('item')].map((item) => {
-    const title = item.querySelector('title')?.textContent?.trim() || 'タイトル未設定';
-    const link = item.querySelector('link')?.textContent?.trim() || '';
-    const pubDate = item.querySelector('pubDate')?.textContent?.trim() || '';
-    return { title, link, pubDate };
-  });
-}
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return dateString || 'DATE';
-  return date.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-}
-
-async function fetchNoteRss() {
-  const endpoints = [
-    NOTE_RSS_URL,
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(NOTE_RSS_URL)}`,
-  ];
-
-  for (const endpoint of endpoints) {
-    try {
-      const response = await fetch(endpoint, { headers: { Accept: 'application/rss+xml, application/xml, text/xml' } });
-      if (!response.ok) continue;
-      const text = await response.text();
-      const items = parseRssItems(text);
-      if (items.length > 0) return items;
-    } catch (_error) {
-      // Try next endpoint.
-    }
-  }
-  return [];
-}
-
+// Render News
 async function renderNews() {
   const host = $('#news-list');
   if (!host) return;
 
-  host.innerHTML = '<article class="news-item"><p class="news-title">記事を読み込み中...</p></article>';
-  const items = await fetchNoteRss();
+  host.innerHTML = '<div class="news-item"><p class="news-title">Loading news...</p></div>';
+  
+  try {
+    const items = await fetchNoteItems();
+    if (!items.length) throw new Error('No items');
 
-  if (!items.length) {
-    host.innerHTML = `
-      <article class="news-item">
-        <p class="news-title">記事を取得できませんでした。最新情報はnoteをご確認ください。</p>
-      </article>
-    `;
-    return;
-  }
-
-  host.innerHTML = items
-    .slice(0, 5)
-    .map(
-      (item) => `
-        <article class="news-item">
-          <p class="news-date">${formatDate(item.pubDate)}</p>
+    host.innerHTML = items
+      .slice(0, 4)
+      .map(item => `
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="news-item">
+          <span class="news-date">${formatDate(item.pubDate)}</span>
           <h3 class="news-title">${item.title}</h3>
-          <a class="news-link" href="${item.link}" target="_blank" rel="noopener noreferrer">記事を読む</a>
-        </article>
-      `,
-    )
-    .join('');
+          <span class="news-link">Read More →</span>
+        </a>
+      `).join('');
+  } catch (err) {
+    host.innerHTML = '<div class="news-item"><p class="news-title">RSS Feed currently unavailable.</p></div>';
+  }
 }
 
-function setupRevealAnimations() {
-  const targets = [...document.querySelectorAll('.reveal')];
-  if (!targets.length) return;
-
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
-      });
-    },
-    { rootMargin: '0px 0px -12% 0px', threshold: 0.15 },
-  );
-
-  targets.forEach((node) => observer.observe(node));
+// Helpers for News
+async function fetchNoteItems() {
+  const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(NOTE_RSS_URL)}`;
+  try {
+    const response = await fetch(proxy);
+    const text = await response.text();
+    const xml = new DOMParser().parseFromString(text, 'text/xml');
+    return [...xml.querySelectorAll('item')].map(item => ({
+      title: item.querySelector('title')?.textContent,
+      link: item.querySelector('link')?.textContent,
+      pubDate: item.querySelector('pubDate')?.textContent,
+    }));
+  } catch (e) {
+    return [];
+  }
 }
 
-function setupHeader() {
-  const menu = $('[data-nav]');
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
+// Intersection Observer for animations
+function setupAnimations() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        
+        // If it's the about section or contains skill filled bars, animate them
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width;
+        });
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+}
+
+// Nav Header Toggle
+function setupNav() {
   const toggle = $('.menu-toggle');
-  if (!toggle || !menu) return;
+  const nav = $('[data-nav]');
+  if (!toggle || !nav) return;
 
   toggle.addEventListener('click', () => {
-    const open = menu.classList.toggle('is-open');
+    const open = nav.classList.toggle('active');
     toggle.setAttribute('aria-expanded', String(open));
     toggle.textContent = open ? 'CLOSE' : 'MENU';
+    
+    if (open) {
+      nav.style.display = 'flex';
+      nav.style.flexDirection = 'column';
+      nav.style.position = 'fixed';
+      nav.style.inset = '0';
+      nav.style.background = 'var(--bg)';
+      nav.style.justifyContent = 'center';
+      nav.style.alignItems = 'center';
+      nav.style.zIndex = '99';
+      nav.style.gap = '2rem';
+    } else {
+      nav.style = '';
+    }
   });
 
-  menu.addEventListener('click', (event) => {
-    if (!(event.target instanceof HTMLAnchorElement)) return;
-    menu.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.textContent = 'MENU';
-  });
-}
-
-function setupSectionTracker() {
-  const sideLabel = $('#side-label');
-  const sections = [...document.querySelectorAll('.section-track')];
-  const navItems = [...document.querySelectorAll('[data-nav-id]')];
-  if (!sideLabel || !sections.length) return;
-
-  const setActive = (id, label) => {
-    sideLabel.textContent = label;
-    navItems.forEach((item) => {
-      item.classList.toggle('is-active', item.getAttribute('data-nav-id') === id);
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('active');
+      nav.style = '';
+      toggle.textContent = 'MENU';
+      toggle.setAttribute('aria-expanded', 'false');
     });
-  };
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (!visible) return;
-      const section = visible.target;
-      if (!(section instanceof HTMLElement)) return;
-
-      const id = section.id || 'footer';
-      const label = section.dataset.section || 'HOME';
-      setActive(id, label);
-    },
-    {
-      threshold: [0.3, 0.5, 0.7],
-      rootMargin: '-20% 0px -20% 0px',
-    },
-  );
-
-  sections.forEach((section) => observer.observe(section));
-}
-
-function setupProfileImage() {
-  const profileImage = $('#profile-image');
-  const frame = document.querySelector('.profile-photo');
-  if (!(profileImage instanceof HTMLImageElement) || !frame) return;
-
-  const fixedSrc = '/assets/img/profile.JPG';
-  profileImage.onload = () => {
-    frame.classList.add('has-image');
-  };
-  profileImage.src = fixedSrc;
+  });
 }
 
 function init() {
+  setupCursor();
   renderFeaturedWorks();
   renderNews();
-  setupHeader();
-  setupRevealAnimations();
-  setupSectionTracker();
-  setupProfileImage();
+  setupAnimations();
+  setupNav();
 }
+
+window.addEventListener('scroll', () => {
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section');
+  
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (pageYOffset >= sectionTop - 120) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(a => {
+    a.classList.remove('is-active');
+    if (a.getAttribute('href').includes(current)) {
+      a.classList.add('is-active');
+    }
+  });
+});
 
 init();
