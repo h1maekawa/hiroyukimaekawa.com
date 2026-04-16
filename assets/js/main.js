@@ -62,7 +62,7 @@ const works = [
   },
 ];
 
-const NOTE_RSS_URL = 'https://note.com/hiroyuki_maekawa/rss/';
+const NOTE_RSS_URL = 'https://note.com/note_career/rss/';
 
 const $ = (selector) => document.querySelector(selector);
 

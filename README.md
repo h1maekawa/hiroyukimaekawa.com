@@ -1,4 +1,4 @@
-# HIROYUKI MAEKAWA Portfolio
+# HIRO Portfolio
 
 静的サイト（HTML / CSS / JavaScript）です。Viteは開発サーバーとビルドに利用しています。
 
