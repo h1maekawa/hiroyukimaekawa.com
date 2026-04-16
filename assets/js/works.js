@@ -54,6 +54,15 @@ const works = [
     icon: '⚙️',
     tags: ['Vue.js', 'Firebase'],
   },
+  {
+    title: 'Career Lab',
+    subtitle: 'キャリア・採用支援',
+    year: '2026',
+    date: '2026-04-15',
+    description: 'AIを活用したキャリア戦略設計と、採用プロセスの自動化・効率化を支援。',
+    icon: '🚀',
+    tags: ['Career Strategy', 'AI Integration'],
+  },
 ];
 
 const host = document.querySelector('#all-works');
