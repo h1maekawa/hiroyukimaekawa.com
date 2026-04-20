@@ -1,217 +1,395 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIRO | Web Director & AI Integrator</title>
-    <meta name="description" content="HIROのポートフォリオ。AI活用とキャリア支援、HP制作を軸に、成果につながるWeb制作を提供します。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;700;800&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>HIRO.DEV — 知らないことで損する人をなくす</title>
+    <meta name="description" content="AI活用・Web制作・キャリア支援で、あなたのポテンシャルを最大化。無料相談から実装まで一貫して対応します。"/>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css"/>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="noise-overlay"></div>
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header id="header">
+    <nav class="container">
+        <a href="#" class="nav-logo">HIRO<span>.</span>DEV</a>
+        <div class="nav-links">
+            <a href="#hero">自己紹介</a>
+            <a href="#content">コンテンツ</a>
+            <a href="#app">ツール</a>
+            <a href="#contact" class="nav-cta">無料相談 →</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+</header>
 
-<!-- Nav -->
-<nav>
-    <a href="#" class="nav-logo">H<span>.</span>M</a>
-    <ul class="nav-links" data-nav>
-        <li><a href="#works" data-nav-id="works">Works</a></li>
-        <li><a href="#about" data-nav-id="about">About</a></li>
-        <li><a href="#news" data-nav-id="news">News</a></li>
-        <li><a href="#contact" data-nav-id="contact">Contact</a></li>
-    </ul>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">MENU</button>
-</nav>
-
-<!-- Hero -->
-<section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-vertical">HIRO — Developer & Creator</div>
-
-    <div class="hero-content">
-        <div class="hero-tag">Web Director & AI Integrator</div>
-        <h1 class="hero-title">
-            <div>HIRO</div>
-            <div class="outline">AI</div>
-            <div class="accent">INTEGRATOR</div>
-        </h1>
-        <p class="hero-sub">
-            AI活用とHP制作を組み合わせ、<br>
-            問い合わせ・採用・売上につながるWebを設計します。<br>
-            構成設計から実装・改善運用まで一貫して対応します。
-        </p>
-    </div>
-
-    <div class="hero-scroll">
-        <div class="scroll-line"></div>
-        Scroll
-    </div>
-</section>
-
-<!-- Marquee -->
-<div class="marquee-wrap">
-    <div class="marquee-track">
-        <div class="marquee-item">Web Design<span>◆</span></div>
-        <div class="marquee-item">AI Integration<span>◆</span></div>
-        <div class="marquee-item">UI / UX Design<span>◆</span></div>
-        <div class="marquee-item">Productivity Tools<span>◆</span></div>
-        <div class="marquee-item">Web Development<span>◆</span></div>
-        <div class="marquee-item">HIRO<span>◆</span></div>
-        <!-- duplicate for seamless loop -->
-        <div class="marquee-item">Web Design<span>◆</span></div>
-        <div class="marquee-item">AI Integration<span>◆</span></div>
-        <div class="marquee-item">UI / UX Design<span>◆</span></div>
-        <div class="marquee-item">Productivity Tools<span>◆</span></div>
-        <div class="marquee-item">Web Development<span>◆</span></div>
-        <div class="marquee-item">前川 弘行<span>◆</span></div>
-    </div>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#hero">自己紹介</a>
+    <a href="#content">コンテンツ</a>
+    <a href="#app">ツール</a>
+    <a href="#contact" style="color:var(--accent);font-weight:700;">🎯 無料相談する</a>
 </div>
 
-<!-- Profile -->
-<section class="section section-track profile-section fade-up" id="profile" data-section="PROFILE">
-    <div class="container">
-      <div class="profile-panel">
-        <div class="profile-info">
-          <p class="profile-num">01</p>
-          <div class="profile-names">
-              <p class="profile-ja">ヒロ</p>
-              <p class="profile-en">HIRO</p>
-          </div>
-          <p class="profile-meta">Web Director / AI Integrator / Career Support</p>
-          <p class="profile-meta">Tokyo, Japan</p>
-          <div class="profile-divider"></div>
-          <p class="profile-text">
-            事業成果につながるHP制作と、業務に定着するAI導入支援、キャリア開発支援を行っています。<br>
-            構成設計・実装に加え、個人のキャリア戦略や組織の採用支援まで一貫して対応します。
-          </p>
-        </div>
-        <figure class="profile-figure">
-          <div class="profile-photo">
-            <img
-              id="profile-image"
-              class="profile-photo-img"
-              src="/assets/img/profile.JPG"
-              alt="ヒロのプロフィール写真"
-            />
-          </div>
-        </figure>
-      </div>
-    </div>
-</section>
-
-<!-- Works -->
-<section class="works fade-up" id="works">
-    <div class="section-label">Selected Works</div>
-    <div class="works-grid" id="featured-works">
-        <!-- Dynamically populated by main.js -->
-    </div>
-    <div style="margin-top: 4rem; text-align: center;">
-        <a href="/works.html" class="contact-link">All Works →</a>
-    </div>
-</section>
-
-<!-- About -->
-<section class="about fade-up" id="about">
-    <div class="section-label">About Me</div>
-    <div class="about-grid">
+<!-- ============================================================
+     HERO / SELF-INTRODUCTION
+============================================================ -->
+<section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="container hero-content">
+        <!-- Left: Text content -->
         <div>
-            <h2 class="about-heading">
-                Building tools<br>
-                people <em>actually</em><br>
-                want to use.
+            <div class="hero-ctas reveal reveal-delay-3">
+                <a href="#contact" class="btn-primary">🎯 無料相談する</a>
+                <a href="#content" class="btn-secondary">📝 noteで学ぶ</a>
+            </div>
+            
+            <div class="hero-stats reveal reveal-delay-3" style="margin-top: 48px;">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">1<span>万+</span></div>
+                    <div class="hero-stat-label">Clients helped</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">98<span>%</span></div>
+                    <div class="hero-stat-label">Satisfaction rate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Profile Image -->
+        <div class="hero-visual reveal reveal-delay-2" style="display: block;">
+            <div class="profile-card" style="position:relative;">
+                <div class="profile-image-wrapper">
+                    <img src="/assets/img/profile.JPG" alt="Hiro M." class="profile-img">
+                </div>
+                <div class="floating-tag tag1" style="bottom: -20px; right: -20px; top: auto;">
+                    <span>Web Director @ Hiro.dev</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CONTENT / NOTE
+============================================================ -->
+<section class="content-section" id="content">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="badge">Note コンテンツ</span>
+            <h2 class="section-title">知識で差をつける、<br/>厳選コンテンツ。</h2>
+            <p class="section-sub">就活・副業・IT・お金。あなたが今すぐ使える情報を無料でお届け。続きはnoteで。</p>
+        </div>
+        <div class="content-filters reveal">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="shukatsu">就活</button>
+            <button class="filter-btn" data-filter="fukugyou">副業</button>
+            <button class="filter-btn" data-filter="it">ITスキル</button>
+            <button class="filter-btn" data-filter="money">お金</button>
+        </div>
+        <div class="content-grid" id="contentGrid">
+
+            <!-- Card 1: 就活 -->
+            <article class="content-card reveal" data-cat="shukatsu">
+                <div class="content-card-thumb" style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);">
+                    <div class="thumb-emoji">🎓</div>
+                </div>
+                <div class="content-card-body">
+                    <div class="content-card-cat"><span class="badge">就活</span></div>
+                    <h3 class="content-card-title">大手に内定した僕が、就活で本当に大事だと気づいた3つのこと</h3>
+                    <p class="content-card-desc">自己分析・企業研究・面接対策。全部やったけど、本当に大事なのはこれだった。</p>
+                    <div class="content-card-preview">
+                        「ガクチカは部活やバイトじゃないといけない」——これ、完全に間違いです。面接官が見ているのは<span style="opacity:0.3">...続きはnoteで</span>
+                    </div>
+                    <div class="content-card-cta">
+                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
+                        <span class="read-time">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 2: 副業 -->
+            <article class="content-card reveal reveal-delay-1" data-cat="fukugyou">
+                <div class="content-card-thumb" style="background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);">
+                    <div class="thumb-emoji">💰</div>
+                </div>
+                <div class="content-card-body">
+                    <div class="content-card-cat"><span class="badge badge--green">副業</span></div>
+                    <h3 class="content-card-title">月10万円の副業を0から作る、完全ロードマップ2024</h3>
+                    <p class="content-card-desc">副業で稼ぐために最初の1ヶ月でやること全てをまとめました。</p>
+                    <div class="content-card-preview">
+                        最初の失敗は「スキルが足りない」と思い込んでいたこと。実際は<span style="opacity:0.3">...続きはnoteで</span>
+                    </div>
+                    <div class="content-card-cta">
+                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
+                        <span class="read-time">8 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 3: IT -->
+            <article class="content-card reveal reveal-delay-2" data-cat="it">
+                <div class="content-card-thumb" style="background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%);">
+                    <div class="thumb-emoji">⚡</div>
+                </div>
+                <div class="content-card-body">
+                    <div class="content-card-cat"><span class="badge" style="background:#ede9fe;color:#6d28d9;">ITスキル</span></div>
+                    <h3 class="content-card-title">AIツール10選——仕事の速度を2倍にする実践ガイド</h3>
+                    <p class="content-card-desc">毎日使える生産性AIツールを厳選。具体的な活用法まで解説。</p>
+                    <div class="content-card-preview">
+                        「ChatGPTを使っている」だけでは差はつきません。差がつくのは<span style="opacity:0.3">...続きはnoteで</span>
+                    </div>
+                    <div class="content-card-cta">
+                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
+                        <span class="read-time">6 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4: お金 -->
+            <article class="content-card reveal" data-cat="money">
+                <div class="content-card-thumb" style="background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);">
+                    <div class="thumb-emoji">📊</div>
+                </div>
+                <div class="content-card-body">
+                    <div class="content-card-cat"><span class="badge" style="background:#fef3c7;color:#92400e;">お金</span></div>
+                    <h3 class="content-card-title">新卒が最初の1年でやるべきお金の設計書</h3>
+                    <p class="content-card-desc">iDeCo・NISA・保険——全部ひとつの記事で完結する設計図。</p>
+                    <div class="content-card-preview">
+                        22歳で始めるか32歳で始めるかで、老後の資産は最大で<span style="opacity:0.3">...続きはnoteで</span>
+                    </div>
+                    <div class="content-card-cta">
+                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
+                        <span class="read-time">7 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 5: 副業 -->
+            <article class="content-card reveal reveal-delay-1" data-cat="fukugyou">
+                <div class="content-card-thumb" style="background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);">
+                    <div class="thumb-emoji">🚀</div>
+                </div>
+                <div class="content-card-body">
+                    <div class="content-card-cat"><span class="badge badge--green">副業</span></div>
+                    <h3 class="content-card-title">会社員がフリーランスに転向する前に絶対に知るべきこと</h3>
+                    <p class="content-card-desc">収入・税金・保険——フリーランスのリアルを全部話します。</p>
+                    <div class="content-card-preview">
+                        「フリーランスは自由」というイメージは半分本当で、半分嘘。具体的には<span style="opacity:0.3">...続きはnoteで</span>
+                    </div>
+                    <div class="content-card-cta">
+                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
+                        <span class="read-time">9 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 6: IT -->
+            <article class="content-card reveal reveal-delay-2" data-cat="it">
+                <div class="content-card-thumb" style="background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%);">
+                    <div class="thumb-emoji">🛠️</div>
+                </div>
+                <div class="content-card-body">
+                    <div class="content-card-cat"><span class="badge" style="background:#ede9fe;color:#6d28d9;">ITスキル</span></div>
+                    <h3 class="content-card-title">プログラミング未経験が3ヶ月で稼げるようになるロードマップ</h3>
+                    <p class="content-card-desc">ゼロから副業収入まで。最短ルートを全て公開します。</p>
+                    <div class="content-card-preview">
+                        独学で挫折する人の9割が間違えているのは「最初に選ぶ言語」ではなく<span style="opacity:0.3">...続きはnoteで</span>
+                    </div>
+                    <div class="content-card-cta">
+                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
+                        <span class="read-time">10 min read</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <div style="text-align:center;margin-top:48px;" class="reveal">
+            <a href="https://note.com/" target="_blank" class="btn-secondary">
+                📝 noteで全記事を見る →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     APP SECTION
+============================================================ -->
+<section class="app-section" id="app">
+    <div class="app-bg"></div>
+    <div class="container app-inner">
+        <div>
+            <p class="app-label reveal">自作ツール</p>
+            <h2 class="app-title reveal reveal-delay-1">あなたの課題を、<br/>ツールで解決する。</h2>
+            <div class="app-problem reveal reveal-delay-1">
+                <p class="app-problem-label">❌ Problem</p>
+                <p>「何から始めればいいかわからない」「タスクが多すぎて重要なことに集中できない」「情報は集めてるのに行動できない」</p>
+            </div>
+            <div class="app-solution reveal reveal-delay-2">
+                <p class="app-solution-label">✅ Solution</p>
+                <p>独自のフレームワークを搭載した無料Webアプリで、優先度・行動計画・進捗管理を一元化。考える時間を、行動に変換する。</p>
+            </div>
+            <a href="#" class="btn-white reveal reveal-delay-2">🔧 無料で使う →</a>
+        </div>
+
+        <div class="app-visual reveal reveal-delay-1">
+            <div class="app-mockup">
+                <div class="app-mockup-bar">
+                    <div class="mockup-dot"></div>
+                    <div class="mockup-dot"></div>
+                    <div class="mockup-dot"></div>
+                    <div class="mockup-title">hiro.dev/app — Dashboard</div>
+                </div>
+                <div class="mockup-content">
+                    <div class="mockup-row">
+                        <div class="mockup-icon" style="background:rgba(59,130,246,0.15);">📋</div>
+                        <div class="mockup-text">
+                            <div class="mockup-text-title">副業ロードマップ診断</div>
+                            <div class="mockup-text-sub">あなたに最適な副業を3分で特定</div>
+                        </div>
+                        <div class="mockup-badge green">NEW</div>
+                    </div>
+                    <div class="mockup-row">
+                        <div class="mockup-icon" style="background:rgba(251,191,36,0.15);">💰</div>
+                        <div class="mockup-text">
+                            <div class="mockup-text-title">資産シミュレーター</div>
+                            <div class="mockup-text-sub">10年後の資産を今すぐ計算</div>
+                        </div>
+                        <div class="mockup-badge yellow">HOT</div>
+                    </div>
+                    <div class="mockup-row">
+                        <div class="mockup-icon" style="background:rgba(52,211,153,0.15);">🎯</div>
+                        <div class="mockup-text">
+                            <div class="mockup-text-title">就活スコアチェッカー</div>
+                            <div class="mockup-text-sub">自己PRを点数化・改善提案</div>
+                        </div>
+                        <div class="mockup-badge blue">FREE</div>
+                    </div>
+                    <div class="mockup-row">
+                        <div class="mockup-icon" style="background:rgba(239,68,68,0.15);">⚡</div>
+                        <div class="mockup-text">
+                            <div class="mockup-text-title">タスク優先度エンジン</div>
+                            <div class="mockup-text-sub">今日やるべきことを自動で決定</div>
+                        </div>
+                        <div class="mockup-badge green">LIVE</div>
+                    </div>
+                </div>
+                <div class="app-flow">
+                    <div class="app-flow-title">使用後の導線</div>
+                    <div class="app-flow-steps">
+                        <div class="app-flow-step"><span>🔧 ツール</span></div>
+                        <div class="app-flow-arrow">→</div>
+                        <div class="app-flow-step"><span>📝 note記事</span></div>
+                        <div class="app-flow-arrow">→</div>
+                        <div class="app-flow-step"><span>💼 サービス</span></div>
+                        <div class="app-flow-arrow">→</div>
+                        <div class="app-flow-step"><span>🎯 相談</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CTA SECTION
+============================================================ -->
+<section style="padding:120px 0; background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);" id="contact">
+    <div class="container" style="text-align:center;">
+        <div class="reveal">
+            <p style="font-family:var(--font-mono);font-size:13px;color:rgba(255,255,255,0.7);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:24px;font-weight:600;">限定 · 無料相談</p>
+            <h2 style="font-family:var(--font-head);font-size:clamp(40px,6vw,64px);font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1.1;margin-bottom:32px;">
+                まず話してみませんか？<br/>相談は完全無料です。
             </h2>
-            <p class="about-text">
-                事業成果につながるHP制作と、業務に定着するAI導入支援、そして個人の可能性を広げるキャリア支援を行っています。
+            <p style="font-size:18px;color:rgba(255,255,255,0.85);margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.8;">
+                就活・副業・ITスキル・お金——<br/>どんな悩みでも、最短で解決への道を示します。
             </p>
-            <p class="about-text">
-                コードを書くこと以上に、「使う人の体験」を大切にしています。シンプルで直感的、それでいてパワフルなツールを目指しています。
-            </p>
-            <div class="about-interests">
-                <div class="interest">
-                    <div class="interest-icon">🌊</div>
-                    <div class="interest-label">Ocean</div>
-                </div>
-                <div class="interest">
-                    <div class="interest-icon">🐈</div>
-                    <div class="interest-label">Cats</div>
-                </div>
-                <div class="interest">
-                    <div class="interest-icon">💻</div>
-                    <div class="interest-label">Coding</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="skills-list">
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">Frontend / React · Vue</span>
-                    <span class="skill-val">90%</span>
-                </div>
-                <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">Backend / Node · Supabase</span>
-                    <span class="skill-val">75%</span>
-                </div>
-                <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">UI/UX Design</span>
-                    <span class="skill-val">80%</span>
-                </div>
-                <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">Career Strategy & Support</span>
-                    <span class="skill-val">85%</span>
-                </div>
-                <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
-            </div>
+            <a href="mailto:h1maekawa123@gmail.com" class="btn-white" style="padding:20px 52px; font-size:18px;">
+                🎯 無料相談はこちら →
+            </a>
+            <p style="margin-top:32px;font-size:14px;color:rgba(255,255,255,0.5);font-family:var(--font-mono);font-weight:500;">現在の空き: 月5名限定 / 通常24時間以内に返信</p>
         </div>
     </div>
 </section>
 
-<!-- News -->
-<section class="news fade-up" id="news">
-    <div class="section-label">Latest News</div>
-    <div class="news-list" id="news-list">
-        <!-- Dynamically populated by main.js from note.com RSS -->
-    </div>
-</section>
-
-<!-- Contact -->
-<section class="contact fade-up" id="contact">
-    <div class="contact-inner">
-        <h2 class="contact-heading">
-            Let's<br>
-            <span class="outline">Work</span><br>
-            Together.
-        </h2>
-        <p class="contact-text">
-            HP制作、AI導入支援、キャリア支援、プロダクト開発のご相談など、<br>
-            お気軽にお問い合わせください。
-        </p>
-        <a href="mailto:h1maekawa123@gmail.com" class="contact-link">
-            h1maekawa123@gmail.com →
-        </a>
-    </div>
-</section>
-
-<!-- Footer -->
+<!-- ============================================================
+     FOOTER
+============================================================ -->
 <footer>
-    <span class="footer-name">HIRO — Creative AI Integrator</span>
-    <span class="footer-copy">© 2026 All rights reserved</span>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">HIRO<span>.</span>DEV</div>
+                <p class="footer-desc">知らないことで損する人をなくす。情報の解像度を上げることで、あなたのポテンシャルを最大化する。</p>
+            </div>
+            <div>
+                <div class="footer-col-title">コンテンツ</div>
+                <div class="footer-links">
+                    <a href="https://note.com/" target="_blank">📝 note</a>
+                    <a href="#content">就活ガイド</a>
+                    <a href="#content">副業ロードマップ</a>
+                    <a href="#content">ITスキル</a>
+                    <a href="#content">お金の設計書</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">ツール</div>
+                <div class="footer-links">
+                    <a href="#app">副業診断</a>
+                    <a href="#app">資産シミュレーター</a>
+                    <a href="#app">就活スコアチェック</a>
+                    <a href="#app">タスク優先エンジン</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">SNS / Legal</div>
+                <div class="footer-links">
+                    <a href="https://twitter.com/" target="_blank">🐦 Twitter / X</a>
+                    <a href="https://www.instagram.com/" target="_blank">📸 Instagram</a>
+                    <a href="https://www.youtube.com/" target="_blank">📺 YouTube</a>
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">特定商取引法</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2026 HIRO.DEV — ALL RIGHTS RESERVED.</div>
+            <div class="footer-legal">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Affiliate Disclosure</a>
+            </div>
+        </div>
+    </div>
 </footer>
 
-<script type="module" src="/assets/js/main.js"></script>
+<!-- ============================================================
+     FIXED CTA BAR
+============================================================ -->
+<div class="fixed-cta" id="fixedCta">
+    <div class="fixed-cta-text">
+        <div class="cta-pulse"></div>
+        <div>
+            <strong>まずは無料相談。</strong>
+            <span class="detail" style="color:rgba(255,255,255,0.5);font-size:13px;"> 月5名限定・24時間以内返信</span>
+        </div>
+    </div>
+    <a href="#contact" class="btn-cta">🎯 無料相談する →</a>
+</div>
+
+<!-- Scripts -->
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
