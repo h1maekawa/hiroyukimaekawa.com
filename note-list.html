@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes | piro - 記事一覧</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base Styles (Shared with index.html) --- */
+        :root {
+            --bg-color: #58B2DC;
+            --surface-color: #ffffff;
+            --accent-color: #0d0d0d;
+            --text-primary: #0d0d0d;
+            --text-secondary: #333333;
+            --font-en: 'Syne', sans-serif;
+            --font-jp: 'Noto Sans JP', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --section-padding: 120px;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 60px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-jp);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: var(--font-en);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 48px;
+            text-transform: uppercase;
+        }
+
+        .placeholder-img {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: #333;
+        }
+
+        /* --- Page Specific --- */
+        #page-header {
+            padding: 180px 0 60px;
+            text-align: center;
+        }
+
+        .note-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 120px;
+        }
+
+        .article-card {
+            background: var(--surface-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .article-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .article-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-link {
+            margin-top: auto;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-link::after {
+            content: "→";
+            transition: var(--transition);
+        }
+
+        .article-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* --- Header & Footer --- */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 24px 0;
+            background: rgba(88, 178, 220, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-en);
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        footer {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-sns {
+            display: flex;
+            gap: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="logo">piro</a>
+            <nav style="display: flex; gap: 32px; font-family: var(--font-en); font-weight: 700; font-size: 0.9rem;">
+                <a href="index.html#about">ABOUT</a>
+                <a href="note-list.html" style="color: var(--accent-color);">NOTE</a>
+                <a href="products.html">PRODUCTS</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="page-header">
+            <div class="container">
+                <h1 class="section-title">Note List</h1>
+                <p style="color: var(--text-secondary);">思考と経験のアウトプット</p>
+            </div>
+        </section>
+
+        <section id="notes">
+            <div class="container">
+                <div class="note-grid">
+                    <!-- ここに記事を追加してください -->
+                    <div class="article-card">
+                        <div class="article-thumb">
+                            <div class="placeholder-img"></div>
+                        </div>
+                        <div class="article-body">
+                            <span class="badge">Business</span>
+                            <h3 class="article-title">ビジネスを加速させる思考法：0から1を生み出すために</h3>
+                            <p class="article-excerpt">事業を立ち上げる際に最も重要なのは、完璧なプランよりも「最初の数歩」をどう踏み出すかです...</p>
+                            <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-thumb">
+                            <div class="placeholder-img"></div>
+                        </div>
+                        <div class="article-body">
+                            <span class="badge">Tech</span>
+                            <h3 class="article-title">Vercelとモダンフロントエンド：爆速開発の裏側</h3>
+                            <p class="article-excerpt">なぜ今の時代にVercelが選ばれるのか。開発効率とユーザー体験の両立を目指すための技術選定について...</p>
+                            <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-thumb">
+                            <div class="placeholder-img"></div>
+                        </div>
+                        <div class="article-body">
+                            <span class="badge">Career</span>
+                            <h3 class="article-title">自分らしいキャリアを描くために、今すぐできる3つのこと</h3>
+                            <p class="article-excerpt">キャリアコンサルタントとして多くの相談を受けてきた中で、共通して重要だと感じていること...</p>
+                            <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-thumb">
+                            <div class="placeholder-img"></div>
+                        </div>
+                        <div class="article-body">
+                            <span class="badge">Life</span>
+                            <h3 class="article-title">広島・尾道から世界へ：ローカルから始めるプロダクト作り</h3>
+                            <p class="article-excerpt">故郷である尾道の風景が、私のものづくりにどのような影響を与えているかをお話しします...</p>
+                            <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                        </div>
+                    </div>
+                    <!-- 追加ポイントここまで -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                <a href="index.html" class="logo">piro</a>
+                <div class="footer-sns">
+                    <a href="#YOUR_URL_HERE">Instagram</a>
+                    <a href="#YOUR_URL_HERE">X (Twitter)</a>
+                    <a href="#YOUR_URL_HERE">note</a>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">&copy; 2024 piro. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

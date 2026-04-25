@@ -74,7 +74,18 @@ if (host) {
   host.innerHTML = sorted
     .map((work, index) => {
       const num = String(index + 1).padStart(2, '0');
-      const thumbUrl = `https://images.unsplash.com/photo-${index + 1600000000000}?auto=format&fit=crop&q=80&w=800`; // Placeholder logic
+      const images = [
+        'photo-1460925895917-afdab827c52f',
+        'photo-1498050108023-c5249f4df085',
+        'photo-1461749280684-dccba630e2f6',
+        'photo-1517694712202-14dd9538aa97',
+        'photo-1504384308090-c894fdcc538d',
+        'photo-1519389950473-47ba0277781c',
+        'photo-1555066931-4365d14bab8c',
+        'photo-1581291518633-83b4ebd1d83e'
+      ];
+      const imgId = images[index % images.length];
+      const thumbUrl = `https://images.unsplash.com/${imgId}?auto=format&fit=crop&q=80&w=800`;
       
       return `
         <a href="${work.url || '#'}" class="work-card fade-up">

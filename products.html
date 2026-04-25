@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | piro - プロダクト一覧</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base Styles (Shared with index.html) --- */
+        :root {
+            --bg-color: #58B2DC;
+            --surface-color: #ffffff;
+            --accent-color: #0d0d0d;
+            --text-primary: #0d0d0d;
+            --text-secondary: #333333;
+            --font-en: 'Syne', sans-serif;
+            --font-jp: 'Noto Sans JP', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-jp);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: var(--font-en);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 48px;
+            text-transform: uppercase;
+        }
+
+        .placeholder-img {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: #333;
+        }
+
+        /* --- Page Specific --- */
+        #page-header {
+            padding: 180px 0 60px;
+            text-align: center;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            margin-bottom: 120px;
+        }
+
+        .product-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            background: var(--surface-color);
+            padding: 60px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        @media (max-width: 992px) {
+            .product-item {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px;
+            }
+        }
+
+        .product-item:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.01);
+        }
+
+        .product-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            font-family: var(--font-en);
+        }
+
+        .product-tags {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .product-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .product-visual {
+            width: 100%;
+            aspect-ratio: 16/10;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 40px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: 700;
+            border-radius: 100px;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        /* --- Header & Footer --- */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 24px 0;
+            background: rgba(88, 178, 220, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-en);
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        footer {
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="logo">piro</a>
+            <nav style="display: flex; gap: 32px; font-family: var(--font-en); font-weight: 700; font-size: 0.9rem;">
+                <a href="index.html#about">ABOUT</a>
+                <a href="note-list.html">NOTE</a>
+                <a href="products.html" style="color: var(--accent-color);">PRODUCTS</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="page-header">
+            <div class="container">
+                <h1 class="section-title">Products</h1>
+                <p style="color: var(--text-secondary);">制作したアプリケーションとツール</p>
+            </div>
+        </section>
+
+        <section id="product-list">
+            <div class="container">
+                <div class="product-list">
+                    <!-- ここにプロダクトを追加してください -->
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-tags">
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Vercel</span>
+                                <span class="tag">OpenAI API</span>
+                            </div>
+                            <h2>AI Slide Gen</h2>
+                            <p class="product-desc">
+                                テキストプロンプトからプレゼンテーションのスライド構成と内容を自動生成。資料作成の時間を大幅に削減するビジネスツールです。
+                            </p>
+                            <a href="#YOUR_URL_HERE" class="btn">使ってみる →</a>
+                        </div>
+                        <div class="product-visual">
+                            <div class="placeholder-img"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-tags">
+                                <span class="tag">Vue.js</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">TailwindCSS</span>
+                            </div>
+                            <h2>Career Hub</h2>
+                            <p class="product-desc">
+                                キャリア相談の予約、ヒアリングシートの送付、面談ログの管理をすべて一つの場所で行える、対人支援者向けの管理システムです。
+                            </p>
+                            <a href="#YOUR_URL_HERE" class="btn">使ってみる →</a>
+                        </div>
+                        <div class="product-visual">
+                            <div class="placeholder-img"></div>
+                        </div>
+                    </div>
+                    <!-- 追加ポイントここまで -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                <a href="index.html" class="logo">piro</a>
+                <div style="display: flex; gap: 24px;">
+                    <a href="#YOUR_URL_HERE">Instagram</a>
+                    <a href="#YOUR_URL_HERE">X (Twitter)</a>
+                    <a href="#YOUR_URL_HERE">note</a>
+                </div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary);">&copy; 2024 piro. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

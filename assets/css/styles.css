@@ -774,3 +774,25 @@ footer { background: #050810; color: rgba(255,255,255,0.7); padding: 100px 0 40p
   .ach-grid { grid-template-columns: 1fr; }
   .hero-stats { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   CURSOR (WORKS PAGE)
+============================================================ */
+.cursor {
+    width: 8px; height: 8px; background: var(--accent);
+    border-radius: 50%; position: fixed; pointer-events: none;
+    z-index: 9999; transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+}
+.cursor.hover { width: 12px; height: 12px; background: var(--accent-pop); }
+.cursor-ring {
+    width: 40px; height: 40px; border: 1.5px solid var(--accent);
+    border-radius: 50%; position: fixed; pointer-events: none;
+    z-index: 9998; transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+.cursor-ring.hover { width: 60px; height: 60px; border-color: var(--accent-pop); border-width: 1px; }
+
+@media (max-width: 768px) {
+    .cursor, .cursor-ring { display: none; }
+}

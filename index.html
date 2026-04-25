@@ -1,395 +1,824 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>HIRO.DEV — 知らないことで損する人をなくす</title>
-    <meta name="description" content="AI活用・Web制作・キャリア支援で、あなたのポテンシャルを最大化。無料相談から実装まで一貫して対応します。"/>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piro | Portfolio - つくる・つなぐ・つたえる</title>
+    <meta name="description" content="広島県尾道市出身。会社役員、アプリケーション開発者、キャリアコンサルタントとして活動するpiroのポートフォリオサイトです。">
+    <!-- Google Fonts: Syne for English headings, Noto Sans JP for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base Styles --- */
+        :root {
+            --bg-color: #58B2DC; /* SORA (#58B2DC) */
+            --surface-color: #ffffff;
+            --accent-color: #0d0d0d;
+            --text-primary: #0d0d0d;
+            --text-secondary: #333333;
+            --font-en: 'Syne', sans-serif;
+            --font-jp: 'Noto Sans JP', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --section-padding: 120px;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 60px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-jp);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Components --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: var(--font-en);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 48px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 32px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: 700;
+            border-radius: 100px;
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .placeholder-img {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: #333;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(88, 178, 220, 0.1);
+        }
+        .placeholder-img::after {
+            content: "IMAGE";
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            opacity: 0.2;
+        }
+
+        /* --- Section: Hero --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+        }
+
+        .hero-left {
+            position: relative;
+        }
+
+        .hero-img-box {
+            width: 100%;
+            aspect-ratio: 4/5;
+            margin-bottom: 32px;
+        }
+
+        .hero-name {
+            font-family: var(--font-en);
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .hero-catch {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .hero-right {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .nav-card {
+            background: var(--surface-color);
+            padding: 32px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card:hover {
+            transform: translateX(10px);
+            background: #222;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-card .icon {
+            font-size: 2rem;
+        }
+
+        .nav-card .label {
+            font-family: var(--font-en);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .nav-card .arrow {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: var(--transition);
+        }
+
+        .nav-card:hover .arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Section: About --- */
+        #about {
+            padding: var(--section-padding) 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: -37px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .timeline-year {
+            font-family: var(--font-en);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .skill-card {
+            background: var(--surface-color);
+            padding: 40px 24px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .skill-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .cv-area {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* --- Section: Note --- */
+        #note {
+            padding: var(--section-padding) 0;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        @media (max-width: 992px) {
+            .article-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .article-card {
+            background: var(--bg-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .article-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .article-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-link {
+            margin-top: auto;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-link::after {
+            content: "→";
+            transition: var(--transition);
+        }
+
+        .article-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* --- Section: Products --- */
+        #products {
+            padding: var(--section-padding) 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-card {
+            background: var(--surface-color);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            margin-bottom: 24px;
+        }
+
+        /* --- Section: Footer --- */
+        footer {
+            padding: 80px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--bg-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+        }
+
+        .footer-logo {
+            font-family: var(--font-en);
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .footer-sns {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-sns a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+        }
+
+        /* --- Animation Helpers --- */
+        .cursor {
+            display: inline-block;
+            width: 0.1em;
+            background-color: var(--accent-color);
+            margin-left: 0.1em;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- ============================================================
-     HEADER
-============================================================ -->
-<header id="header">
-    <nav class="container">
-        <a href="#" class="nav-logo">HIRO<span>.</span>DEV</a>
-        <div class="nav-links">
-            <a href="#hero">自己紹介</a>
-            <a href="#content">コンテンツ</a>
-            <a href="#app">ツール</a>
-            <a href="#contact" class="nav-cta">無料相談 →</a>
+    <!-- Header (Simple Navigation) -->
+    <header style="position: fixed; width: 100%; top: 0; z-index: 100; padding: 24px 0;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="footer-logo">piro</a>
+            <nav style="display: flex; gap: 32px; font-family: var(--font-en); font-weight: 700; font-size: 0.9rem;">
+                <a href="#about">ABOUT</a>
+                <a href="note-list.html">NOTE</a>
+                <a href="products.html">PRODUCTS</a>
+            </nav>
         </div>
-        <div class="hamburger" id="hamburger">
-            <span></span><span></span><span></span>
-        </div>
-    </nav>
-</header>
+    </header>
 
-<div class="mobile-menu" id="mobileMenu">
-    <a href="#hero">自己紹介</a>
-    <a href="#content">コンテンツ</a>
-    <a href="#app">ツール</a>
-    <a href="#contact" style="color:var(--accent);font-weight:700;">🎯 無料相談する</a>
-</div>
-
-<!-- ============================================================
-     HERO / SELF-INTRODUCTION
-============================================================ -->
-<section class="hero" id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
-    <div class="container hero-content">
-        <!-- Left: Text content -->
-        <div>
-            <div class="hero-ctas reveal reveal-delay-3">
-                <a href="#contact" class="btn-primary">🎯 無料相談する</a>
-                <a href="#content" class="btn-secondary">📝 noteで学ぶ</a>
-            </div>
-            
-            <div class="hero-stats reveal reveal-delay-3" style="margin-top: 48px;">
-                <div class="hero-stat">
-                    <div class="hero-stat-num">1<span>万+</span></div>
-                    <div class="hero-stat-label">Clients helped</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num">98<span>%</span></div>
-                    <div class="hero-stat-label">Satisfaction rate</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right: Profile Image -->
-        <div class="hero-visual reveal reveal-delay-2" style="display: block;">
-            <div class="profile-card" style="position:relative;">
-                <div class="profile-image-wrapper">
-                    <img src="/assets/img/profile.JPG" alt="Hiro M." class="profile-img">
-                </div>
-                <div class="floating-tag tag1" style="bottom: -20px; right: -20px; top: auto;">
-                    <span>Web Director @ Hiro.dev</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================================
-     CONTENT / NOTE
-============================================================ -->
-<section class="content-section" id="content">
-    <div class="container">
-        <div class="section-header reveal">
-            <span class="badge">Note コンテンツ</span>
-            <h2 class="section-title">知識で差をつける、<br/>厳選コンテンツ。</h2>
-            <p class="section-sub">就活・副業・IT・お金。あなたが今すぐ使える情報を無料でお届け。続きはnoteで。</p>
-        </div>
-        <div class="content-filters reveal">
-            <button class="filter-btn active" data-filter="all">ALL</button>
-            <button class="filter-btn" data-filter="shukatsu">就活</button>
-            <button class="filter-btn" data-filter="fukugyou">副業</button>
-            <button class="filter-btn" data-filter="it">ITスキル</button>
-            <button class="filter-btn" data-filter="money">お金</button>
-        </div>
-        <div class="content-grid" id="contentGrid">
-
-            <!-- Card 1: 就活 -->
-            <article class="content-card reveal" data-cat="shukatsu">
-                <div class="content-card-thumb" style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);">
-                    <div class="thumb-emoji">🎓</div>
-                </div>
-                <div class="content-card-body">
-                    <div class="content-card-cat"><span class="badge">就活</span></div>
-                    <h3 class="content-card-title">大手に内定した僕が、就活で本当に大事だと気づいた3つのこと</h3>
-                    <p class="content-card-desc">自己分析・企業研究・面接対策。全部やったけど、本当に大事なのはこれだった。</p>
-                    <div class="content-card-preview">
-                        「ガクチカは部活やバイトじゃないといけない」——これ、完全に間違いです。面接官が見ているのは<span style="opacity:0.3">...続きはnoteで</span>
-                    </div>
-                    <div class="content-card-cta">
-                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
-                        <span class="read-time">5 min read</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 2: 副業 -->
-            <article class="content-card reveal reveal-delay-1" data-cat="fukugyou">
-                <div class="content-card-thumb" style="background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);">
-                    <div class="thumb-emoji">💰</div>
-                </div>
-                <div class="content-card-body">
-                    <div class="content-card-cat"><span class="badge badge--green">副業</span></div>
-                    <h3 class="content-card-title">月10万円の副業を0から作る、完全ロードマップ2024</h3>
-                    <p class="content-card-desc">副業で稼ぐために最初の1ヶ月でやること全てをまとめました。</p>
-                    <div class="content-card-preview">
-                        最初の失敗は「スキルが足りない」と思い込んでいたこと。実際は<span style="opacity:0.3">...続きはnoteで</span>
-                    </div>
-                    <div class="content-card-cta">
-                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
-                        <span class="read-time">8 min read</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 3: IT -->
-            <article class="content-card reveal reveal-delay-2" data-cat="it">
-                <div class="content-card-thumb" style="background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%);">
-                    <div class="thumb-emoji">⚡</div>
-                </div>
-                <div class="content-card-body">
-                    <div class="content-card-cat"><span class="badge" style="background:#ede9fe;color:#6d28d9;">ITスキル</span></div>
-                    <h3 class="content-card-title">AIツール10選——仕事の速度を2倍にする実践ガイド</h3>
-                    <p class="content-card-desc">毎日使える生産性AIツールを厳選。具体的な活用法まで解説。</p>
-                    <div class="content-card-preview">
-                        「ChatGPTを使っている」だけでは差はつきません。差がつくのは<span style="opacity:0.3">...続きはnoteで</span>
-                    </div>
-                    <div class="content-card-cta">
-                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
-                        <span class="read-time">6 min read</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 4: お金 -->
-            <article class="content-card reveal" data-cat="money">
-                <div class="content-card-thumb" style="background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);">
-                    <div class="thumb-emoji">📊</div>
-                </div>
-                <div class="content-card-body">
-                    <div class="content-card-cat"><span class="badge" style="background:#fef3c7;color:#92400e;">お金</span></div>
-                    <h3 class="content-card-title">新卒が最初の1年でやるべきお金の設計書</h3>
-                    <p class="content-card-desc">iDeCo・NISA・保険——全部ひとつの記事で完結する設計図。</p>
-                    <div class="content-card-preview">
-                        22歳で始めるか32歳で始めるかで、老後の資産は最大で<span style="opacity:0.3">...続きはnoteで</span>
-                    </div>
-                    <div class="content-card-cta">
-                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
-                        <span class="read-time">7 min read</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 5: 副業 -->
-            <article class="content-card reveal reveal-delay-1" data-cat="fukugyou">
-                <div class="content-card-thumb" style="background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);">
-                    <div class="thumb-emoji">🚀</div>
-                </div>
-                <div class="content-card-body">
-                    <div class="content-card-cat"><span class="badge badge--green">副業</span></div>
-                    <h3 class="content-card-title">会社員がフリーランスに転向する前に絶対に知るべきこと</h3>
-                    <p class="content-card-desc">収入・税金・保険——フリーランスのリアルを全部話します。</p>
-                    <div class="content-card-preview">
-                        「フリーランスは自由」というイメージは半分本当で、半分嘘。具体的には<span style="opacity:0.3">...続きはnoteで</span>
-                    </div>
-                    <div class="content-card-cta">
-                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
-                        <span class="read-time">9 min read</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 6: IT -->
-            <article class="content-card reveal reveal-delay-2" data-cat="it">
-                <div class="content-card-thumb" style="background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%);">
-                    <div class="thumb-emoji">🛠️</div>
-                </div>
-                <div class="content-card-body">
-                    <div class="content-card-cat"><span class="badge" style="background:#ede9fe;color:#6d28d9;">ITスキル</span></div>
-                    <h3 class="content-card-title">プログラミング未経験が3ヶ月で稼げるようになるロードマップ</h3>
-                    <p class="content-card-desc">ゼロから副業収入まで。最短ルートを全て公開します。</p>
-                    <div class="content-card-preview">
-                        独学で挫折する人の9割が間違えているのは「最初に選ぶ言語」ではなく<span style="opacity:0.3">...続きはnoteで</span>
-                    </div>
-                    <div class="content-card-cta">
-                        <a href="https://note.com/" target="_blank" class="note-link">noteで続きを読む <span>→</span></a>
-                        <span class="read-time">10 min read</span>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-        <div style="text-align:center;margin-top:48px;" class="reveal">
-            <a href="https://note.com/" target="_blank" class="btn-secondary">
-                📝 noteで全記事を見る →
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================================
-     APP SECTION
-============================================================ -->
-<section class="app-section" id="app">
-    <div class="app-bg"></div>
-    <div class="container app-inner">
-        <div>
-            <p class="app-label reveal">自作ツール</p>
-            <h2 class="app-title reveal reveal-delay-1">あなたの課題を、<br/>ツールで解決する。</h2>
-            <div class="app-problem reveal reveal-delay-1">
-                <p class="app-problem-label">❌ Problem</p>
-                <p>「何から始めればいいかわからない」「タスクが多すぎて重要なことに集中できない」「情報は集めてるのに行動できない」</p>
-            </div>
-            <div class="app-solution reveal reveal-delay-2">
-                <p class="app-solution-label">✅ Solution</p>
-                <p>独自のフレームワークを搭載した無料Webアプリで、優先度・行動計画・進捗管理を一元化。考える時間を、行動に変換する。</p>
-            </div>
-            <a href="#" class="btn-white reveal reveal-delay-2">🔧 無料で使う →</a>
-        </div>
-
-        <div class="app-visual reveal reveal-delay-1">
-            <div class="app-mockup">
-                <div class="app-mockup-bar">
-                    <div class="mockup-dot"></div>
-                    <div class="mockup-dot"></div>
-                    <div class="mockup-dot"></div>
-                    <div class="mockup-title">hiro.dev/app — Dashboard</div>
-                </div>
-                <div class="mockup-content">
-                    <div class="mockup-row">
-                        <div class="mockup-icon" style="background:rgba(59,130,246,0.15);">📋</div>
-                        <div class="mockup-text">
-                            <div class="mockup-text-title">副業ロードマップ診断</div>
-                            <div class="mockup-text-sub">あなたに最適な副業を3分で特定</div>
+    <!-- Section: Hero -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-left">
+                    <div class="hero-img-box">
+                        <div class="placeholder-img">
+                            <!-- クラス名 .profile-img で画像を差し替え可能 -->
+                            <div class="profile-img"></div>
                         </div>
-                        <div class="mockup-badge green">NEW</div>
                     </div>
-                    <div class="mockup-row">
-                        <div class="mockup-icon" style="background:rgba(251,191,36,0.15);">💰</div>
-                        <div class="mockup-text">
-                            <div class="mockup-text-title">資産シミュレーター</div>
-                            <div class="mockup-text-sub">10年後の資産を今すぐ計算</div>
+                    <h1 class="hero-name"><span id="typewriter"></span><span class="cursor">|</span></h1>
+                    <p class="hero-catch">つくる・つなぐ・つたえる</p>
+                </div>
+                <div class="hero-right">
+                    <a href="#YOUR_URL_HERE" class="nav-card">
+                        <span class="label">📝 NOTE</span>
+                        <span class="arrow">→</span>
+                    </a>
+                    <a href="#YOUR_URL_HERE" class="nav-card">
+                        <span class="label">📱 INSTAGRAM</span>
+                        <span class="arrow">→</span>
+                    </a>
+                    <a href="#YOUR_URL_HERE" class="nav-card">
+                        <span class="label">🐦 X (TWITTER)</span>
+                        <span class="arrow">→</span>
+                    </a>
+                    <a href="#YOUR_URL_HERE" class="nav-card" style="background: var(--accent-color); color: var(--bg-color);">
+                        <span class="label">🚀 MY APPS</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: About -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About</h2>
+            <div class="about-content">
+                <div class="fade-in">
+                    <h3 style="font-size: 2rem; margin-bottom: 24px;">piro</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 32px;">
+                        広島県尾道市出身。ビジネスの現場から技術開発、個人のキャリア支援まで、「つくる・つなぐ・つたえる」を軸に多角的な活動を展開しています。
+                    </p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-year">Business Leader</span>
+                            <p>会社役員としてビジネスを牽引。組織設計から戦略立案まで幅広く担当。</p>
                         </div>
-                        <div class="mockup-badge yellow">HOT</div>
-                    </div>
-                    <div class="mockup-row">
-                        <div class="mockup-icon" style="background:rgba(52,211,153,0.15);">🎯</div>
-                        <div class="mockup-text">
-                            <div class="mockup-text-title">就活スコアチェッカー</div>
-                            <div class="mockup-text-sub">自己PRを点数化・改善提案</div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">Developer</span>
+                            <p>アプリケーション開発に従事。Vercelを活用し、スピーディなプロダクトリリースを実現。</p>
                         </div>
-                        <div class="mockup-badge blue">FREE</div>
-                    </div>
-                    <div class="mockup-row">
-                        <div class="mockup-icon" style="background:rgba(239,68,68,0.15);">⚡</div>
-                        <div class="mockup-text">
-                            <div class="mockup-text-title">タスク優先度エンジン</div>
-                            <div class="mockup-text-sub">今日やるべきことを自動で決定</div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">Career Consultant</span>
+                            <p>国家資格キャリアコンサルタントとして、多くの個人の可能性を引き出す支援を実施。</p>
                         </div>
-                        <div class="mockup-badge green">LIVE</div>
                     </div>
                 </div>
-                <div class="app-flow">
-                    <div class="app-flow-title">使用後の導線</div>
-                    <div class="app-flow-steps">
-                        <div class="app-flow-step"><span>🔧 ツール</span></div>
-                        <div class="app-flow-arrow">→</div>
-                        <div class="app-flow-step"><span>📝 note記事</span></div>
-                        <div class="app-flow-arrow">→</div>
-                        <div class="app-flow-step"><span>💼 サービス</span></div>
-                        <div class="app-flow-arrow">→</div>
-                        <div class="app-flow-step"><span>🎯 相談</span></div>
+                <div class="fade-in">
+                    <div class="skill-grid">
+                        <div class="skill-card">
+                            <span class="skill-icon">💼</span>
+                            <h4 class="skill-title">ビジネス設計</h4>
+                            <p class="skill-desc">事業の核となる仕組みづくり。戦略的な視点で価値を最大化します。</p>
+                        </div>
+                        <div class="skill-card">
+                            <span class="skill-icon">🛠</span>
+                            <h4 class="skill-title">プロダクト開発</h4>
+                            <p class="skill-desc">アイデアを形にする技術。ユーザー体験を重視した開発を行います。</p>
+                        </div>
+                        <div class="skill-card">
+                            <span class="skill-icon">🎯</span>
+                            <h4 class="skill-title">キャリア支援</h4>
+                            <p class="skill-desc">一人ひとりに寄り添った伴走。最適な選択を共に考えます。</p>
+                        </div>
+                    </div>
+                    <div class="cv-area">
+                        <a href="#YOUR_URL_HERE" class="btn">相談してみる</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ============================================================
-     CTA SECTION
-============================================================ -->
-<section style="padding:120px 0; background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);" id="contact">
-    <div class="container" style="text-align:center;">
-        <div class="reveal">
-            <p style="font-family:var(--font-mono);font-size:13px;color:rgba(255,255,255,0.7);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:24px;font-weight:600;">限定 · 無料相談</p>
-            <h2 style="font-family:var(--font-head);font-size:clamp(40px,6vw,64px);font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1.1;margin-bottom:32px;">
-                まず話してみませんか？<br/>相談は完全無料です。
-            </h2>
-            <p style="font-size:18px;color:rgba(255,255,255,0.85);margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.8;">
-                就活・副業・ITスキル・お金——<br/>どんな悩みでも、最短で解決への道を示します。
-            </p>
-            <a href="mailto:h1maekawa123@gmail.com" class="btn-white" style="padding:20px 52px; font-size:18px;">
-                🎯 無料相談はこちら →
-            </a>
-            <p style="margin-top:32px;font-size:14px;color:rgba(255,255,255,0.5);font-family:var(--font-mono);font-weight:500;">現在の空き: 月5名限定 / 通常24時間以内に返信</p>
-        </div>
-    </div>
-</section>
+    <!-- Section: Note -->
+    <section id="note">
+        <div class="container">
+            <h2 class="section-title fade-in">読まれている記事</h2>
+            <div class="article-grid">
+                <!-- ここに記事を追加してください -->
+                <div class="article-card fade-in">
+                    <div class="article-thumb">
+                        <div class="placeholder-img note-thumb-1"></div>
+                    </div>
+                    <div class="article-body">
+                        <span class="badge">Business</span>
+                        <h3 class="article-title">ビジネスを加速させる思考法：0から1を生み出すために</h3>
+                        <p class="article-excerpt">事業を立ち上げる際に最も重要なのは、完璧なプランよりも「最初の数歩」をどう踏み出すかです。私の経験から得た知見を共有します...</p>
+                        <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                    </div>
+                </div>
 
-<!-- ============================================================
-     FOOTER
-============================================================ -->
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <div class="footer-logo">HIRO<span>.</span>DEV</div>
-                <p class="footer-desc">知らないことで損する人をなくす。情報の解像度を上げることで、あなたのポテンシャルを最大化する。</p>
+                <div class="article-card fade-in">
+                    <div class="article-thumb">
+                        <div class="placeholder-img note-thumb-2"></div>
+                    </div>
+                    <div class="article-body">
+                        <span class="badge">Tech</span>
+                        <h3 class="article-title">Vercelとモダンフロントエンド：爆速開発の裏側</h3>
+                        <p class="article-excerpt">なぜ今の時代にVercelが選ばれるのか。開発効率とユーザー体験の両立を目指すための技術選定について綴りました...</p>
+                        <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                    </div>
+                </div>
+
+                <div class="article-card fade-in">
+                    <div class="article-thumb">
+                        <div class="placeholder-img note-thumb-3"></div>
+                    </div>
+                    <div class="article-body">
+                        <span class="badge">Career</span>
+                        <h3 class="article-title">自分らしいキャリアを描くために、今すぐできる3つのこと</h3>
+                        <p class="article-excerpt">キャリアコンサルタントとして多くの相談を受けてきた中で、共通して重要だと感じている「自己理解」の深め方を解説します...</p>
+                        <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                    </div>
+                </div>
+                <!-- 追加ポイントここまで -->
             </div>
-            <div>
-                <div class="footer-col-title">コンテンツ</div>
-                <div class="footer-links">
-                    <a href="https://note.com/" target="_blank">📝 note</a>
-                    <a href="#content">就活ガイド</a>
-                    <a href="#content">副業ロードマップ</a>
-                    <a href="#content">ITスキル</a>
-                    <a href="#content">お金の設計書</a>
+            <div style="text-align: center;">
+                <a href="note-list.html" class="btn btn-outline">もっと見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Products -->
+    <section id="products">
+        <div class="container">
+            <h2 class="section-title fade-in">つくったもの</h2>
+            <div class="product-grid">
+                <!-- ここにプロダクトを追加してください -->
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <div class="placeholder-img product-img-1"></div>
+                    </div>
+                    <div class="product-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Vercel</span>
+                        <span class="tag">TailwindCSS</span>
+                    </div>
+                    <h3 class="product-name">AI Slide Gen</h3>
+                    <p class="product-desc">プロンプトからスライド構成を自動生成するウェブアプリケーション。ビジネスの効率化を支援します。</p>
+                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる →</a>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-img">
+                        <div class="placeholder-img product-img-2"></div>
+                    </div>
+                    <div class="product-tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Firebase</span>
+                    </div>
+                    <h3 class="product-name">Career Hub</h3>
+                    <p class="product-desc">キャリアコンサルティングの予約と履歴管理を一元化するプラットフォーム。</p>
+                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる →</a>
+                </div>
+                <!-- 追加ポイントここまで -->
+            </div>
+            <div style="text-align: center;">
+                <a href="products.html" class="btn">すべて見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="index.html" class="footer-logo">piro</a>
+                    <p style="color: var(--text-secondary); margin-top: 16px;">つくる・つなぐ・つたえる</p>
+                </div>
+                <div class="footer-sns">
+                    <a href="#YOUR_URL_HERE">Instagram</a>
+                    <a href="#YOUR_URL_HERE">X (Twitter)</a>
+                    <a href="#YOUR_URL_HERE">note</a>
                 </div>
             </div>
-            <div>
-                <div class="footer-col-title">ツール</div>
-                <div class="footer-links">
-                    <a href="#app">副業診断</a>
-                    <a href="#app">資産シミュレーター</a>
-                    <a href="#app">就活スコアチェック</a>
-                    <a href="#app">タスク優先エンジン</a>
-                </div>
-            </div>
-            <div>
-                <div class="footer-col-title">SNS / Legal</div>
-                <div class="footer-links">
-                    <a href="https://twitter.com/" target="_blank">🐦 Twitter / X</a>
-                    <a href="https://www.instagram.com/" target="_blank">📸 Instagram</a>
-                    <a href="https://www.youtube.com/" target="_blank">📺 YouTube</a>
-                    <a href="#">プライバシーポリシー</a>
-                    <a href="#">特定商取引法</a>
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 piro. All rights reserved.</p>
+                <a href="#YOUR_URL_HERE">お問い合わせ</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="footer-copy">© 2026 HIRO.DEV — ALL RIGHTS RESERVED.</div>
-            <div class="footer-legal">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Affiliate Disclosure</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- ============================================================
-     FIXED CTA BAR
-============================================================ -->
-<div class="fixed-cta" id="fixedCta">
-    <div class="fixed-cta-text">
-        <div class="cta-pulse"></div>
-        <div>
-            <strong>まずは無料相談。</strong>
-            <span class="detail" style="color:rgba(255,255,255,0.5);font-size:13px;"> 月5名限定・24時間以内返信</span>
-        </div>
-    </div>
-    <a href="#contact" class="btn-cta">🎯 無料相談する →</a>
-</div>
+    <script>
+        /* --- Typewriter Effect --- */
+        const text = "piro";
+        const typewriterElement = document.getElementById('typewriter');
+        let index = 0;
 
-<!-- Scripts -->
-<script src="/assets/js/main.js"></script>
+        function type() {
+            if (index < text.length) {
+                typewriterElement.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 200);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(type, 500);
+        });
+
+        /* --- Scroll Animation (Intersection Observer) --- */
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        /* --- Smooth Scroll for anchor links --- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#YOUR')) return;
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
