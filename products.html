@@ -172,9 +172,61 @@
             padding: 80px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
+
+        /* --- Floating Social Bar --- */
+        .social-sticky {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 1000;
+        }
+
+        .social-sticky-item {
+            width: 48px;
+            height: 48px;
+            background: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .social-sticky-item:hover {
+            transform: scale(1.1) translateX(-5px);
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        @media (max-width: 768px) {
+            .social-sticky {
+                right: 12px;
+                gap: 12px;
+            }
+            .social-sticky-item {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- Floating Social Bar -->
+    <div class="social-sticky">
+        <a href="https://note.com/mae_chan1" class="social-sticky-item" title="Note">📝</a>
+        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="Instagram">📱</a>
+        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="X (Twitter)">🐦</a>
+    </div>
 
     <header>
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
@@ -247,7 +299,7 @@
                 <div style="display: flex; gap: 24px;">
                     <a href="#YOUR_URL_HERE">Instagram</a>
                     <a href="#YOUR_URL_HERE">X (Twitter)</a>
-                    <a href="#YOUR_URL_HERE">note</a>
+                    <a href="https://note.com/mae_chan1">note</a>
                 </div>
             </div>
             <p style="font-size: 0.8rem; color: var(--text-secondary);">&copy; 2024 piro. All rights reserved.</p>

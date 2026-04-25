@@ -545,13 +545,70 @@
         }
 
         /* --- Animation Helpers --- */
-        .cursor {
-            display: inline-block;
-            width: 0.1em;
-            background-color: var(--accent-color);
-            margin-left: 0.1em;
-            animation: blink 0.7s infinite;
+        /* --- Floating Social Bar --- */
+        .social-sticky {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 1000;
         }
+
+        .social-sticky-item {
+            width: 48px;
+            height: 48px;
+            background: var(--surface-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .social-sticky-item:hover {
+            transform: scale(1.1) translateX(-5px);
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        @media (max-width: 768px) {
+            .social-sticky {
+                right: 12px;
+                gap: 12px;
+            }
+            .social-sticky-item {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* --- Hover Refinements --- */
+        .nav-card:hover {
+            transform: translateX(10px);
+            background: #f8f8f8;
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: rgba(0,0,0,0.1);
+        }
+
 
         @keyframes blink {
             0% { opacity: 1; }
@@ -561,6 +618,13 @@
     </style>
 </head>
 <body>
+
+    <!-- Floating Social Bar -->
+    <div class="social-sticky">
+        <a href="https://note.com/mae_chan1" class="social-sticky-item" title="Note">📝</a>
+        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="Instagram">📱</a>
+        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="X (Twitter)">🐦</a>
+    </div>
 
     <!-- Header (Simple Navigation) -->
     <header style="position: fixed; width: 100%; top: 0; z-index: 100; padding: 24px 0;">
@@ -589,10 +653,10 @@
                     <p class="hero-catch">つくる・つなぐ・つたえる</p>
                 </div>
                 <div class="hero-right">
-                    <a href="#YOUR_URL_HERE" class="nav-card">
+                <a href="https://note.com/mae_chan1" class="nav-card">
                         <span class="label">📝 NOTE</span>
                         <span class="arrow">→</span>
-                    </a>
+                </a>
                     <a href="#YOUR_URL_HERE" class="nav-card">
                         <span class="label">📱 INSTAGRAM</span>
                         <span class="arrow">→</span>
@@ -669,13 +733,13 @@
                 <!-- ここに記事を追加してください -->
                 <div class="article-card fade-in">
                     <div class="article-thumb">
-                        <div class="placeholder-img note-thumb-1"></div>
+                        <img src="https://assets.st-note.com/production/uploads/images/255767771/rectangle_large_type_2_7ece7ec7dda79f70622daf73c5a4cde6.png?width=800" alt="プロローグ：2026年、個人開発は「無料」でどこまで行ける？" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="article-body">
-                        <span class="badge">Business</span>
-                        <h3 class="article-title">ビジネスを加速させる思考法：0から1を生み出すために</h3>
-                        <p class="article-excerpt">事業を立ち上げる際に最も重要なのは、完璧なプランよりも「最初の数歩」をどう踏み出すかです。私の経験から得た知見を共有します...</p>
-                        <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
+                        <span class="badge">Individual Dev</span>
+                        <h3 class="article-title">プロローグ：2026年、個人開発は「無料」でどこまで行ける？</h3>
+                        <p class="article-excerpt">「自分のWebサービスやアプリを作ってみたい。でも、サーバー代にお金はかけたくないし、SEOも妥協したくない…」そんな欲張りな願いが、今の時代は驚くほど簡単に叶います。</p>
+                        <a href="https://note.com/mae_chan1/n/n25a0fd46c969" class="article-link">noteで読む</a>
                     </div>
                 </div>
 
@@ -761,7 +825,7 @@
                 <div class="footer-sns">
                     <a href="#YOUR_URL_HERE">Instagram</a>
                     <a href="#YOUR_URL_HERE">X (Twitter)</a>
-                    <a href="#YOUR_URL_HERE">note</a>
+                    <a href="https://note.com/mae_chan1">note</a>
                 </div>
             </div>
             <div class="footer-bottom">
