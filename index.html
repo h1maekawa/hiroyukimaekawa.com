@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,622 +9,37 @@
     <!-- Google Fonts: Syne for English headings, Noto Sans JP for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <style>
-        /* --- Base Styles --- */
-        :root {
-            --bg-color: #58B2DC; /* SORA (#58B2DC) */
-            --surface-color: #ffffff;
-            --accent-color: #0d0d0d;
-            --text-primary: #0d0d0d;
-            --text-secondary: #333333;
-            --font-en: 'Syne', sans-serif;
-            --font-jp: 'Noto Sans JP', sans-serif;
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            --section-padding: 120px;
-        }
-
-        @media (max-width: 768px) {
-            :root {
-                --section-padding: 60px;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: var(--font-jp);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- Components --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section-title {
-            font-family: var(--font-en);
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 48px;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: var(--transition);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 16px 32px;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            font-weight: 700;
-            border-radius: 100px;
-            transition: var(--transition);
-            border: 2px solid var(--accent-color);
-        }
-
-        .btn:hover {
-            background-color: transparent;
-            color: var(--accent-color);
-            transform: scale(1.05);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--accent-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-        }
-
-        .placeholder-img {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            color: #333;
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(88, 178, 220, 0.1);
-        }
-        .placeholder-img::after {
-            content: "IMAGE";
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            opacity: 0.2;
-        }
-
-        /* --- Section: Hero --- */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-        }
-
-        .hero-left {
-            position: relative;
-        }
-
-        .hero-img-box {
-            width: 100%;
-            aspect-ratio: 4/5;
-            margin-bottom: 32px;
-        }
-
-        .hero-name {
-            font-family: var(--font-en);
-            font-size: clamp(4rem, 10vw, 8rem);
-            line-height: 0.9;
-            margin-bottom: 16px;
-        }
-
-        .hero-catch {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .hero-right {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .nav-card {
-            background: var(--surface-color);
-            padding: 32px;
-            border-radius: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-card:hover {
-            transform: translateX(10px);
-            background: #222;
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-card .icon {
-            font-size: 2rem;
-        }
-
-        .nav-card .label {
-            font-family: var(--font-en);
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .nav-card .arrow {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: var(--transition);
-        }
-
-        .nav-card:hover .arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* --- Section: About --- */
-        #about {
-            padding: var(--section-padding) 0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 32px;
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-        }
-
-        .timeline-item::after {
-            content: "";
-            position: absolute;
-            left: -37px;
-            top: 10px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-color);
-            border-radius: 50%;
-        }
-
-        .timeline-year {
-            font-family: var(--font-en);
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .skill-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 60px;
-        }
-
-        @media (max-width: 768px) {
-            .skill-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .skill-card {
-            background: var(--surface-color);
-            padding: 40px 24px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .skill-icon {
-            font-size: 3rem;
-            margin-bottom: 24px;
-            display: block;
-        }
-
-        .skill-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .skill-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .cv-area {
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        /* --- Section: Note --- */
-        #note {
-            padding: var(--section-padding) 0;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-bottom: 48px;
-        }
-
-        @media (max-width: 992px) {
-            .article-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .article-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .article-card {
-            background: var(--bg-color);
-            border-radius: 16px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .article-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .article-thumb {
-            width: 100%;
-            aspect-ratio: 16/9;
-        }
-
-        .article-body {
-            padding: 24px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-bottom: 16px;
-            width: fit-content;
-        }
-
-        .article-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .article-excerpt {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .article-link {
-            margin-top: auto;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .article-link::after {
-            content: "→";
-            transition: var(--transition);
-        }
-
-        .article-link:hover::after {
-            transform: translateX(5px);
-        }
-
-        /* --- Section: Products --- */
-        #products {
-            padding: var(--section-padding) 0;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-bottom: 48px;
-        }
-
-        @media (max-width: 992px) {
-            .product-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .product-card {
-            background: var(--surface-color);
-            border-radius: 20px;
-            padding: 32px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .product-card:hover {
-            transform: scale(1.02);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .product-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .product-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .product-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .product-img {
-            width: 100%;
-            aspect-ratio: 4/3;
-            margin-bottom: 24px;
-        }
-
-        /* --- Section: Footer --- */
-        footer {
-            padding: 80px 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            background: var(--bg-color);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                flex-direction: column;
-                gap: 40px;
-                text-align: center;
-            }
-        }
-
-        .footer-logo {
-            font-family: var(--font-en);
-            font-size: 2rem;
-            font-weight: 800;
-        }
-
-        .footer-sns {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-sns a:hover {
-            opacity: 0.6;
-        }
-
-        .footer-bottom {
-            margin-top: 60px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                align-items: center;
-            }
-        }
-
-        /* --- Animation Helpers --- */
-        /* --- Floating Social Bar --- */
-        .social-sticky {
-            position: fixed;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            z-index: 1000;
-        }
-
-        .social-sticky-item {
-            width: 48px;
-            height: 48px;
-            background: var(--surface-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            font-size: 1.2rem;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .social-sticky-item:hover {
-            transform: scale(1.1) translateX(-5px);
-            background: var(--accent-color);
-            color: var(--bg-color);
-        }
-
-        @media (max-width: 768px) {
-            .social-sticky {
-                right: 12px;
-                gap: 12px;
-            }
-            .social-sticky-item {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-
-        /* --- Hover Refinements --- */
-        .nav-card:hover {
-            transform: translateX(10px);
-            background: #f8f8f8;
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .btn:hover {
-            background-color: #000;
-            color: #fff;
-            transform: scale(1.05);
-        }
-
-        .article-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border-color: rgba(0,0,0,0.1);
-        }
-
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
 
     <!-- Floating Social Bar -->
     <div class="social-sticky">
-        <a href="https://note.com/mae_chan1" class="social-sticky-item" title="Note">📝</a>
-        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="Instagram">📱</a>
-        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="X (Twitter)">🐦</a>
+        <a href="https://note.com/mae_chan1" class="social-sticky-item" title="Note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+        </a>
+        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </a>
+        <a href="#YOUR_URL_HERE" class="social-sticky-item" title="X (Twitter)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768M13.232 10.768l6.768 -6.768"></path>
+            </svg>
+        </a>
     </div>
 
     <!-- Header (Simple Navigation) -->
@@ -643,29 +59,47 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-left">
-                    <div class="hero-img-box">
-                        <div class="placeholder-img">
-                            <!-- クラス名 .profile-img で画像を差し替え可能 -->
-                            <div class="profile-img"></div>
-                        </div>
-                    </div>
                     <h1 class="hero-name"><span id="typewriter"></span><span class="cursor">|</span></h1>
                     <p class="hero-catch">つくる・つなぐ・つたえる</p>
                 </div>
                 <div class="hero-right">
-                <a href="https://note.com/mae_chan1" class="nav-card">
-                        <span class="label">📝 NOTE</span>
-                        <span class="arrow">→</span>
-                </a>
-                    <a href="#YOUR_URL_HERE" class="nav-card">
-                        <span class="label">📱 INSTAGRAM</span>
+                    <a href="https://note.com/mae_chan1" class="nav-card">
+                        <span class="label" style="display: flex; align-items: center; gap: 12px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                            NOTE
+                        </span>
                         <span class="arrow">→</span>
                     </a>
                     <a href="#YOUR_URL_HERE" class="nav-card">
-                        <span class="label">🐦 X (TWITTER)</span>
+                        <span class="label" style="display: flex; align-items: center; gap: 12px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            INSTAGRAM
+                        </span>
                         <span class="arrow">→</span>
                     </a>
-                    <a href="#YOUR_URL_HERE" class="nav-card" style="background: var(--accent-color); color: var(--bg-color);">
+                    <a href="#YOUR_URL_HERE" class="nav-card">
+                        <span class="label" style="display: flex; align-items: center; gap: 12px;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768M13.232 10.768l6.768 -6.768">
+                                </path>
+                            </svg>
+                            X (TWITTER)
+                        </span>
+                        <span class="arrow">→</span>
+                    </a>
+                    <a href="#YOUR_URL_HERE" class="nav-card"
+                        style="background: var(--accent-color); color: var(--bg-color);">
                         <span class="label">🚀 MY APPS</span>
                         <span class="arrow">→</span>
                     </a>
@@ -675,52 +109,31 @@
     </section>
 
     <!-- Section: About -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title fade-in">About</h2>
-            <div class="about-content">
-                <div class="fade-in">
-                    <h3 style="font-size: 2rem; margin-bottom: 24px;">piro</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 32px;">
-                        広島県尾道市出身。ビジネスの現場から技術開発、個人のキャリア支援まで、「つくる・つなぐ・つたえる」を軸に多角的な活動を展開しています。
-                    </p>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <span class="timeline-year">Business Leader</span>
-                            <p>会社役員としてビジネスを牽引。組織設計から戦略立案まで幅広く担当。</p>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-year">Developer</span>
-                            <p>アプリケーション開発に従事。Vercelを活用し、スピーディなプロダクトリリースを実現。</p>
-                        </div>
-                        <div class="timeline-item">
-                            <span class="timeline-year">Career Consultant</span>
-                            <p>国家資格キャリアコンサルタントとして、多くの個人の可能性を引き出す支援を実施。</p>
-                        </div>
+    <section id="about" class="fade-in">
+        <div class="about-container">
+            <div class="about-side-label">PROFILE</div>
+
+            <div class="about-main-content">
+                <div class="about-name-jp">前川 裕之</div>
+                <div class="about-name-en">HIROYUKI MAEKAWA</div>
+
+                <div class="about-info-group">
+                    <div class="about-info-item">19XX.XX.XX</div>
+                    <div class="about-info-item">Business Leader / Developer / Career Consultant</div>
+                    <div class="about-info-item" style="display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        @mae_chan1
                     </div>
                 </div>
-                <div class="fade-in">
-                    <div class="skill-grid">
-                        <div class="skill-card">
-                            <span class="skill-icon">💼</span>
-                            <h4 class="skill-title">ビジネス設計</h4>
-                            <p class="skill-desc">事業の核となる仕組みづくり。戦略的な視点で価値を最大化します。</p>
-                        </div>
-                        <div class="skill-card">
-                            <span class="skill-icon">🛠</span>
-                            <h4 class="skill-title">プロダクト開発</h4>
-                            <p class="skill-desc">アイデアを形にする技術。ユーザー体験を重視した開発を行います。</p>
-                        </div>
-                        <div class="skill-card">
-                            <span class="skill-icon">🎯</span>
-                            <h4 class="skill-title">キャリア支援</h4>
-                            <p class="skill-desc">一人ひとりに寄り添った伴走。最適な選択を共に考えます。</p>
-                        </div>
-                    </div>
-                    <div class="cv-area">
-                        <a href="#YOUR_URL_HERE" class="btn">相談してみる</a>
-                    </div>
-                </div>
+            </div>
+
+            <div class="about-image-box">
+                <img src="./assets/img/about-profile.png" alt="Hiroyuki Maekawa Profile" class="profile-img">
             </div>
         </div>
     </section>
@@ -733,12 +146,14 @@
                 <!-- ここに記事を追加してください -->
                 <div class="article-card fade-in">
                     <div class="article-thumb">
-                        <img src="https://assets.st-note.com/production/uploads/images/255767771/rectangle_large_type_2_7ece7ec7dda79f70622daf73c5a4cde6.png?width=800" alt="プロローグ：2026年、個人開発は「無料」でどこまで行ける？" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="https://assets.st-note.com/production/uploads/images/255767771/rectangle_large_type_2_7ece7ec7dda79f70622daf73c5a4cde6.png?width=800"
+                            alt="プロローグ：2026年、個人開発は「無料」でどこまで行ける？" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="article-body">
                         <span class="badge">Individual Dev</span>
                         <h3 class="article-title">プロローグ：2026年、個人開発は「無料」でどこまで行ける？</h3>
-                        <p class="article-excerpt">「自分のWebサービスやアプリを作ってみたい。でも、サーバー代にお金はかけたくないし、SEOも妥協したくない…」そんな欲張りな願いが、今の時代は驚くほど簡単に叶います。</p>
+                        <p class="article-excerpt">
+                            「自分のWebサービスやアプリを作ってみたい。でも、サーバー代にお金はかけたくないし、SEOも妥協したくない…」そんな欲張りな願いが、今の時代は驚くほど簡単に叶います。</p>
                         <a href="https://note.com/mae_chan1/n/n25a0fd46c969" class="article-link">noteで読む</a>
                     </div>
                 </div>
@@ -791,7 +206,8 @@
                     </div>
                     <h3 class="product-name">AI Slide Gen</h3>
                     <p class="product-desc">プロンプトからスライド構成を自動生成するウェブアプリケーション。ビジネスの効率化を支援します。</p>
-                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる →</a>
+                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
+                        →</a>
                 </div>
 
                 <div class="product-card fade-in">
@@ -804,7 +220,8 @@
                     </div>
                     <h3 class="product-name">Career Hub</h3>
                     <p class="product-desc">キャリアコンサルティングの予約と履歴管理を一元化するプラットフォーム。</p>
-                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる →</a>
+                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
+                        →</a>
                 </div>
                 <!-- 追加ポイントここまで -->
             </div>
@@ -822,10 +239,32 @@
                     <a href="index.html" class="footer-logo">piro</a>
                     <p style="color: var(--text-secondary); margin-top: 16px;">つくる・つなぐ・つたえる</p>
                 </div>
-                <div class="footer-sns">
-                    <a href="#YOUR_URL_HERE">Instagram</a>
-                    <a href="#YOUR_URL_HERE">X (Twitter)</a>
-                    <a href="https://note.com/mae_chan1">note</a>
+                <div class="footer-sns" style="display: flex; gap: 24px; align-items: center;">
+                    <a href="#YOUR_URL_HERE" style="display: flex; align-items: center; gap: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        Instagram
+                    </a>
+                    <a href="#YOUR_URL_HERE" style="display: flex; align-items: center; gap: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768M13.232 10.768l6.768 -6.768">
+                            </path>
+                        </svg>
+                        X (Twitter)
+                    </a>
+                    <a href="https://note.com/mae_chan1" style="display: flex; align-items: center; gap: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                        note
+                    </a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -885,4 +324,5 @@
         });
     </script>
 </body>
+
 </html>
