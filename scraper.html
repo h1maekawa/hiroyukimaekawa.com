@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Data Scraper — 営業リスト作成を90%効率化するChrome拡張機能</title>
+    <meta name="description" content="食べログ・ホットペッパー・Google Mapsから飲食店情報を自動抽出。電話番号・住所をワンクリックでCSV出力。営業リスト作成の時間を90%削減します。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/lp-scraper.css">
+</head>
+<body class="lp-body">
+
+    <!-- Grain Overlay -->
+    <div class="lp-grain"></div>
+
+    <!-- ====== HEADER ====== -->
+    <header class="lp-header" id="lp-header">
+        <div class="lp-container lp-header-inner">
+            <a href="index.html" class="lp-logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5V17.5L12 22 3 17.5V6.5L12 2z"></path></svg>
+                piro <span>tools</span>
+            </a>
+            <a href="https://github.com/h1maekawa/restaurant-data-scraper" target="_blank" class="lp-header-cta" id="header-github-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+    </header>
+
+    <!-- ====== 1. HERO — First View ====== -->
+    <section class="lp-hero" id="hero">
+        <div class="lp-hero-glow"></div>
+        <div class="lp-container">
+            <div class="lp-hero-grid">
+                <div>
+                    <div class="lp-hero-tag lp-fade">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                        Chrome Extension — Open Source
+                    </div>
+                    <h1 class="lp-fade">
+                        営業リストを<br>
+                        <span class="accent">90%</span> 速く作る。
+                    </h1>
+                    <p class="lp-hero-sub lp-fade">
+                        食べログ・ホットペッパー・Google Mapsの検索結果から<br>
+                        飲食店情報をワンクリックで抽出。<br>
+                        手作業のリスト作成から、あなたのチームを解放します。
+                    </p>
+                    <div class="lp-hero-actions lp-fade">
+                        <a href="https://github.com/h1maekawa/restaurant-data-scraper" target="_blank" class="lp-btn-primary" id="hero-github-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            GitHubで見る
+                        </a>
+                        <a href="#solution" class="lp-btn-ghost" id="hero-learn-btn">
+                            詳しく見る ↓
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="lp-stats lp-fade">
+                <div class="lp-stat">
+                    <div class="lp-stat-num" data-count="90">90%</div>
+                    <div class="lp-stat-label">作業時間の削減</div>
+                </div>
+                <div class="lp-stat">
+                    <div class="lp-stat-num">3 Sites</div>
+                    <div class="lp-stat-label">対応プラットフォーム</div>
+                </div>
+                <div class="lp-stat">
+                    <div class="lp-stat-num">1 Click</div>
+                    <div class="lp-stat-label">CSV出力まで</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 2. PROBLEM — 課題提起 ====== -->
+    <section class="lp-section lp-problem" id="problem">
+        <div class="lp-container">
+            <div class="lp-label lp-fade">Problem</div>
+            <h2 class="lp-heading lp-fade">
+                営業リスト作成に、<br>まだ何時間もかけていませんか？
+            </h2>
+            <p class="lp-subheading lp-fade">
+                飲食店への営業活動で、最も時間を奪っているのは「リスト作成」です。
+            </p>
+
+            <div class="lp-problem-grid">
+                <div class="lp-problem-card lp-fade">
+                    <div class="lp-problem-icon">⏱</div>
+                    <h3>手動コピペの繰り返しで<br>1リスト作成に3時間以上</h3>
+                    <p>食べログやホットペッパーを1件ずつ開き、店舗名・住所・電話番号を手入力。同じ作業を何百回も繰り返す非効率な時間。</p>
+                </div>
+                <div class="lp-problem-card lp-fade">
+                    <div class="lp-problem-icon">📞</div>
+                    <h3>電話番号の取得だけで<br>膨大な手間がかかる</h3>
+                    <p>各サイトごとにUIが異なり、電話番号の表示形式もバラバラ。一つひとつ確認してコピーする作業は集中力を奪います。</p>
+                </div>
+                <div class="lp-problem-card lp-fade">
+                    <div class="lp-problem-icon">📉</div>
+                    <h3>リスト作成に追われ<br>営業活動そのものが後回しに</h3>
+                    <p>本来注力すべき提案や商談の準備ではなく、データ収集という「作業」に時間を費やしている現状。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 3. SOLUTION — 解決策 ====== -->
+    <section class="lp-section" id="solution">
+        <div class="lp-container">
+            <div class="lp-label lp-fade">Solution</div>
+            <h2 class="lp-heading lp-fade">
+                検索結果からワンクリック。<br>営業リストが自動で完成します。
+            </h2>
+            <p class="lp-subheading lp-fade">
+                ブラウザで検索するだけ。あとは拡張機能が自動で情報を抽出し、CSVとしてダウンロード。リスト作成の時間を「ゼロ」に近づけます。
+            </p>
+
+            <div class="lp-solution-grid">
+                <div class="lp-solution-visual lp-fade">
+                    <div class="lp-code-block">
+                        <span class="cm">// 出力されるCSVイメージ</span><br>
+                        <span class="hl">店舗名</span>, <span class="hl">電話番号</span>, <span class="hl">住所</span>, <span class="hl">ジャンル</span><br>
+                        <span class="str">"居酒屋 つむぎ"</span>, <span class="str">"03-1234-5678"</span>, <span class="str">"東京都..."</span>, <span class="str">"和食"</span><br>
+                        <span class="str">"Trattoria SORA"</span>, <span class="str">"03-8765-4321"</span>, <span class="str">"東京都..."</span>, <span class="str">"イタリアン"</span><br>
+                        <span class="str">"焼肉 龍"</span>, <span class="str">"03-1111-2222"</span>, <span class="str">"東京都..."</span>, <span class="str">"焼肉"</span><br>
+                        <span class="cm">// ... 数百件を一括取得</span>
+                    </div>
+                </div>
+                <div class="lp-fade">
+                    <ul class="lp-solution-list">
+                        <li>
+                            <div class="lp-check">✓</div>
+                            <div>
+                                <h4>3時間 → 20分に短縮</h4>
+                                <p>従来3時間かかっていたリスト作成が、検索＋ワンクリックで完了。営業活動そのものに集中できます。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="lp-check">✓</div>
+                            <div>
+                                <h4>電話番号も自動で取得</h4>
+                                <p>サイトごとに異なるUIからも正確に電話番号を抽出。手動確認の手間をゼロにします。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="lp-check">✓</div>
+                            <div>
+                                <h4>CSV出力でそのまま営業へ</h4>
+                                <p>出力されたCSVはExcelやスプレッドシートでそのまま利用可能。加工なしで即座に営業リストとして活用できます。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="lp-check">✓</div>
+                            <div>
+                                <h4>重複データの自動排除</h4>
+                                <p>複数サイトから取得しても重複を自動検出。クリーンなリストを常に維持します。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 4. FEATURES — 機能紹介 ====== -->
+    <section class="lp-section lp-features" id="features">
+        <div class="lp-container">
+            <div class="lp-label lp-fade">Features</div>
+            <h2 class="lp-heading lp-fade">
+                必要な機能だけを、<br>シンプルに。
+            </h2>
+
+            <div class="lp-feature-grid">
+                <div class="lp-feature-card lp-fade">
+                    <div class="lp-feature-num">01</div>
+                    <h3>マルチサイト自動スクレイピング</h3>
+                    <p>食べログ・ホットペッパー・Google Mapsの3大プラットフォームに対応。サイトごとのUI差異を吸収し、統一フォーマットでデータを取得します。</p>
+                </div>
+                <div class="lp-feature-card lp-fade">
+                    <div class="lp-feature-num">02</div>
+                    <h3>電話番号の精密抽出</h3>
+                    <p>各サイト固有のDOM構造を解析し、電話番号を正確に抽出。形式の違い（ハイフン有無・全角半角）も自動で正規化します。</p>
+                </div>
+                <div class="lp-feature-card lp-fade">
+                    <div class="lp-feature-num">03</div>
+                    <h3>ワンクリックCSV出力</h3>
+                    <p>取得したデータは即座にCSV形式でダウンロード。Excel・Googleスプレッドシートで開くだけで営業リストとして活用可能です。</p>
+                </div>
+                <div class="lp-feature-card lp-fade">
+                    <div class="lp-feature-num">04</div>
+                    <h3>重複排除・データクレンジング</h3>
+                    <p>同じ店舗が複数サイトに掲載されていても自動で検出・排除。常にクリーンなデータセットを維持します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 5. HOW TO USE — 使用イメージ ====== -->
+    <section class="lp-section" id="flow">
+        <div class="lp-container">
+            <div class="lp-label lp-fade">How It Works</div>
+            <h2 class="lp-heading lp-fade">
+                3ステップで完了。<br>複雑な設定は不要です。
+            </h2>
+
+            <div class="lp-flow-steps">
+                <div class="lp-flow-step lp-fade">
+                    <div class="lp-flow-dot">01</div>
+                    <div>
+                        <h4>拡張機能をインストール</h4>
+                        <p>GitHubからダウンロードし、Chromeの拡張機能画面からインストール。デベロッパーモードで「パッケージ化されていない拡張機能を読み込む」を選択するだけです。</p>
+                    </div>
+                </div>
+                <div class="lp-flow-step lp-fade">
+                    <div class="lp-flow-dot">02</div>
+                    <div>
+                        <h4>対応サイトで検索</h4>
+                        <p>食べログ、ホットペッパー、Google Mapsのいずれかで通常通り検索。「渋谷 居酒屋」「新宿 イタリアン」など、営業したいエリア×ジャンルで検索します。</p>
+                    </div>
+                </div>
+                <div class="lp-flow-step lp-fade">
+                    <div class="lp-flow-dot">03</div>
+                    <div>
+                        <h4>ワンクリックで抽出 → CSV完成</h4>
+                        <p>拡張機能アイコンをクリックし「リスト取得開始」を押すだけ。検索結果の全店舗情報が自動抽出され、CSVファイルとしてダウンロードされます。完了時にはデスクトップ通知でお知らせ。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 6. TRUST — 技術・信頼性 ====== -->
+    <section class="lp-section lp-trust" id="trust">
+        <div class="lp-container">
+            <div class="lp-label lp-fade">Trust & Tech</div>
+            <h2 class="lp-heading lp-fade">
+                オープンソースだから、<br>安心して使えます。
+            </h2>
+
+            <div class="lp-trust-grid">
+                <div class="lp-trust-card lp-fade">
+                    <div class="lp-trust-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>JavaScript + Chrome APIs</h3>
+                    <p>Chrome Extension Manifest V3準拠。Content Scripts と Background Service Worker による安定した動作を実現しています。</p>
+                </div>
+                <div class="lp-trust-card lp-fade">
+                    <div class="lp-trust-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </div>
+                    <h3>GitHubで全コード公開</h3>
+                    <p>ソースコードは100%公開。動作内容を誰でも確認でき、セキュリティリスクへの不安を解消します。MIT License。</p>
+                </div>
+                <div class="lp-trust-card lp-fade">
+                    <div class="lp-trust-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>安全なローカル動作</h3>
+                    <p>取得したデータは外部サーバーに送信されません。すべてブラウザ内で完結し、CSVとしてローカルに保存されます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 7. CTA — 最終アクション ====== -->
+    <section class="lp-cta-section" id="cta">
+        <div class="lp-container">
+            <div class="lp-label lp-fade">Get Started</div>
+            <h2 class="lp-fade">
+                リスト作成を、<br>今日から自動化しませんか。
+            </h2>
+            <p class="lp-fade">無料・オープンソース。インストールして、検索して、クリックするだけ。</p>
+            <div class="lp-cta-actions lp-fade">
+                <a href="https://github.com/h1maekawa/restaurant-data-scraper" target="_blank" class="lp-btn-primary" id="cta-github-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHubからインストール
+                </a>
+                <a href="index.html" class="lp-btn-ghost" id="cta-portfolio-btn">
+                    ← ポートフォリオに戻る
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="lp-footer">
+        <div class="lp-container">
+            <p>&copy; 2026 piro tools — <a href="index.html">hiroyukimaekawa.com</a></p>
+        </div>
+    </footer>
+
+    <!-- ====== JS ====== -->
+    <script>
+        /* --- Header scroll effect --- */
+        const header = document.getElementById('lp-header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* --- Scroll reveal (Intersection Observer) --- */
+        const fadeEls = document.querySelectorAll('.lp-fade');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        fadeEls.forEach(el => revealObserver.observe(el));
+
+        /* --- Smooth scroll for anchor links --- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
