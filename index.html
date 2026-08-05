@@ -214,8 +214,7 @@
                 <!-- <img src="./assets/img/coffee.png" alt="Coffee Icon" class="coffee-icon fade-in"> -->
             </div>
 
-            <div class="article-grid">
-                <!-- ここに記事を追加してください -->
+            <div class="article-grid" data-note-feed data-note-limit="3" data-note-animate="true">
                 <div class="article-card stagger-item">
                     <div class="article-thumb">
                         <img src="https://assets.st-note.com/production/uploads/images/255767771/rectangle_large_type_2_7ece7ec7dda79f70622daf73c5a4cde6.png?width=800"
@@ -230,29 +229,6 @@
                     </div>
                 </div>
 
-                <div class="article-card stagger-item">
-                    <div class="article-thumb">
-                        <div class="placeholder-img note-thumb-2"></div>
-                    </div>
-                    <div class="article-body">
-                        <span class="badge">Tech</span>
-                        <h3 class="article-title">Vercelとモダンフロントエンド：爆速開発の裏側</h3>
-                        <p class="article-excerpt">なぜ今の時代にVercelが選ばれるのか。開発効率とユーザー体験の両立を目指すための技術選定について綴りました...</p>
-                        <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
-                    </div>
-                </div>
-
-                <div class="article-card stagger-item">
-                    <div class="article-thumb">
-                        <div class="placeholder-img note-thumb-3"></div>
-                    </div>
-                    <div class="article-body">
-                        <span class="badge">Career</span>
-                        <h3 class="article-title">自分らしいキャリアを描くために、今すぐできる3つのこと</h3>
-                        <p class="article-excerpt">キャリアコンサルタントとして多くの相談を受けてきた中で、共通して重要だと感じている「自己理解」の深め方を解説します...</p>
-                        <a href="#YOUR_URL_HERE" class="article-link">noteで読む</a>
-                    </div>
-                </div>
                 <!-- 追加ポイントここまで -->
             </div>
             <div style="text-align: center;">
@@ -545,6 +521,7 @@
         const revealElements = document.querySelectorAll('.fade-in, .reveal-img, .stagger-item');
         revealElements.forEach(el => revealObserver.observe(el));
     </script>
+    <script src="assets/js/note-feed.js" type="module"></script>
 </body>
 
 </html>

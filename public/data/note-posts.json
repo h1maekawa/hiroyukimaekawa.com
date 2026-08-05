@@ -1,0 +1,14 @@
+{
+  "source": "https://note.com/mae_chan1/rss",
+  "syncedAt": null,
+  "posts": [
+    {
+      "title": "プロローグ：2026年、個人開発は「無料」でどこまで行ける？",
+      "url": "https://note.com/mae_chan1/n/n25a0fd46c969",
+      "publishedAt": "",
+      "image": "https://assets.st-note.com/production/uploads/images/255767771/rectangle_large_type_2_7ece7ec7dda79f70622daf73c5a4cde6.png?width=800",
+      "excerpt": "「自分のWebサービスやアプリを作ってみたい。でも、サーバー代にお金はかけたくないし、SEOも妥協したくない…」",
+      "category": "Individual Dev"
+    }
+  ]
+}
