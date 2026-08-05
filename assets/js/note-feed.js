@@ -49,12 +49,17 @@ const createCard = (post, animate) => {
   return card;
 };
 
+const loadSavedPosts = async () => {
+  const candidates = ['/data/note-posts.json', '/public/data/note-posts.json'];
+  for (const url of candidates) {
+    const response = await fetch(url, { cache: 'no-cache' });
+    if (response.ok) return response.json();
+  }
+  throw new Error('The saved note feed was not found.');
+};
+
 if (containers.length) {
-  fetch('/data/note-posts.json', { cache: 'no-cache' })
-    .then((response) => {
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return response.json();
-    })
+  loadSavedPosts()
     .then(({ posts }) => {
       if (!Array.isArray(posts) || posts.length === 0) throw new Error('No posts');
       containers.forEach((container) => {
