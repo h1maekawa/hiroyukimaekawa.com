@@ -16,7 +16,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     env:
-      NOTE_RSS_URL: ${{ vars.NOTE_RSS_URL || 'https://note.com/mae_chan1/rss' }}
+      NOTE_RSS_URL: ${{ vars.NOTE_RSS_URL || 'https://note.com/maemichi/rss' }}
     steps:
       - uses: actions/checkout@v4
         with:
