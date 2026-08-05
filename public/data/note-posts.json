@@ -1,14 +1,30 @@
 {
-  "source": "https://note.com/mae_chan1/rss",
-  "syncedAt": null,
+  "source": "https://note.com/maemichi/rss",
+  "syncedAt": "2026-08-05T13:35:00.000Z",
   "posts": [
     {
-      "title": "プロローグ：2026年、個人開発は「無料」でどこまで行ける？",
-      "url": "https://note.com/mae_chan1/n/n25a0fd46c969",
-      "publishedAt": "",
-      "image": "https://assets.st-note.com/production/uploads/images/255767771/rectangle_large_type_2_7ece7ec7dda79f70622daf73c5a4cde6.png?width=800",
-      "excerpt": "「自分のWebサービスやアプリを作ってみたい。でも、サーバー代にお金はかけたくないし、SEOも妥協したくない…」",
-      "category": "Individual Dev"
+      "title": "はじめまして。人生を少し生きやすくする方法を、ここに残していきます。",
+      "url": "https://note.com/maemichi/n/nd81ded27d59e",
+      "publishedAt": "2026-08-04T16:46:54.000Z",
+      "image": "https://assets.st-note.com/production/uploads/images/300515079/rectangle_large_type_2_00c5408243f9090740dfa833bfd6922f.png?width=800",
+      "excerpt": "人生を少しだけ生きやすくするために、自分が実際に試したことや考えたことを書いていきます。",
+      "category": "note"
+    },
+    {
+      "title": "「役員」という肩書きを追いかけるのをやめた日。『嫌われる勇気』が教えてくれたこと",
+      "url": "https://note.com/maemichi/n/n789e36a5b448",
+      "publishedAt": "2026-08-03T16:08:33.000Z",
+      "image": "https://assets.st-note.com/production/uploads/images/300216530/rectangle_large_type_2_1672d18fc4a4c020233c343e1c4e904e.png?width=800",
+      "excerpt": "『嫌われる勇気』を読んで、「肩書き」よりも「どう生きたいか」を考えるようになった記録です。",
+      "category": "読書"
+    },
+    {
+      "title": "# はじめまして。「まえみち」です。",
+      "url": "https://note.com/maemichi/n/n10c654bd57ad",
+      "publishedAt": "2026-08-02T15:37:14.000Z",
+      "image": "https://assets.st-note.com/production/uploads/images/299918241/rectangle_large_type_2_bdba3519dad2cd4c43bb3fe40c655620.png?width=800",
+      "excerpt": "AI・読書・副業・資産形成・習慣をテーマに、「人生を、ちょっと豊かに。」するためのヒントを発信します。",
+      "category": "自己紹介"
     }
   ]
 }
