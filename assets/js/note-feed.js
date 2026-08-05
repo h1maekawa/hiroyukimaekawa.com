@@ -50,7 +50,11 @@ const createCard = (post, animate) => {
 };
 
 const loadSavedPosts = async () => {
-  const candidates = ['/data/note-posts.json', '/public/data/note-posts.json'];
+  const version = '20260805-3';
+  const candidates = [
+    `/data/note-posts.json?v=${version}`,
+    `/public/data/note-posts.json?v=${version}`,
+  ];
   for (const url of candidates) {
     const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) continue;
