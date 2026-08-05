@@ -5,7 +5,7 @@ import { parseNoteRss } from './note-rss.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const outputPath = resolve(root, 'public/data/note-posts.json');
-const feedUrl = process.env.NOTE_RSS_URL || 'https://note.com/mae_chan1/rss';
+const feedUrl = process.env.NOTE_RSS_URL || 'https://note.com/maemichi/rss';
 const response = await fetch(feedUrl, {
   headers: { 'user-agent': 'maemichi.com note RSS sync' },
   signal: AbortSignal.timeout(20_000),
