@@ -10,6 +10,16 @@
 - `assets/js/main.js`: トップページ用スクリプト
 - `assets/js/works.js`: 実績一覧ページ用スクリプト
 - `assets/img/`: 画像ファイル
+- `timebox.html` / `assets/js/timebox*.js`: Timebox OS（タイムボックス管理アプリ）
+
+## Timebox OS
+
+`/timebox.html` で動く、1日の時間割を組むアプリです。登録不要・無料で、
+データは利用者の端末（localStorage）にだけ保存します。
+仕様と今後の計画は [docs/TIMEBOX_OS_PRODUCT_ROADMAP.md](docs/TIMEBOX_OS_PRODUCT_ROADMAP.md) を参照してください。
+
+時間割の計算は `assets/js/timebox-engine.js` に純粋関数として置いてあり、
+`npm test`（`tests/timebox-engine.test.js`）で検証しています。
 
 ## 開発
 
