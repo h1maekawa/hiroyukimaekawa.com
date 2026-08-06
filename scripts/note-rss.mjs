@@ -31,7 +31,9 @@ const firstImage = (html) => {
   return match ? decodeEntities(match[1]) : '';
 };
 
-export function parseNoteRss(xml, { limit = 12 } = {}) {
+// noteのRSSは最新25件ほどを返す。ここで切ると記事一覧から古いものが消えるため、
+// 取れるだけ取っておき、各ページで data-note-limit を使って表示件数を決める。
+export function parseNoteRss(xml, { limit = 30 } = {}) {
   if (!/<(?:rss|feed)(?:\s|>)/i.test(xml)) {
     throw new Error('The response is not an RSS or Atom feed.');
   }

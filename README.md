@@ -37,12 +37,22 @@ npm run build
 ## note記事の同期
 
 noteの記事一覧は `public/data/note-posts.json` の保存済みスナップショットを表示します。
-GitHub Actionsが6時間ごとにRSSを確認し、記事に変更がある場合だけスナップショットを
-`main`へコミットします。手動実行は次のコマンドです。
+GitHub Actions（`.github/workflows/sync-note-rss.yml`）が1時間ごとにRSSを確認し、
+記事に変更がある場合だけスナップショットを `main` へコミットします。
+すぐ反映したいときは GitHub の Actions → 「Sync note RSS」→ Run workflow で手動実行できます。
+ローカルからの手動実行は次のコマンドです。
 
 ```bash
 npm run sync:note
 ```
+
+取り込む件数は `scripts/note-rss.mjs` の `limit`（既定30件）で決まります。
+各ページの表示件数は `data-note-limit` 属性で指定します（トップページは3件、
+`note-list.html` は取り込んだ全件）。
+
+同期のワークフローはRSS関連のテストだけを走らせます。
+サイト全体のテストとビルドは `.github/workflows/ci.yml` が見ているため、
+そちらが失敗しても記事の同期は止まりません。
 
 別アカウントへ移行した場合は、ワークフローの `NOTE_RSS_URL` 環境変数でRSS URLを
 上書きできます。RSS取得や検証に失敗した場合、既存スナップショットは変更されません。
