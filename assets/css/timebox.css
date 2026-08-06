@@ -14,13 +14,6 @@
     --tb-radius: 20px;
 }
 
-/* このページは main.js を読まないので、スクロール時の背景を最初から付けておく
-   （付けないと固定ヘッダーの下を本文が透けて通る） */
-.tb-page header {
-    background: rgba(88, 178, 220, 0.92);
-    backdrop-filter: blur(10px);
-}
-
 /* --- Hero --- */
 .tb-hero {
     padding: 160px 0 40px;

@@ -164,6 +164,14 @@ header {
     backdrop-filter: blur(10px);
 }
 
+/* ハンバーガーを持たないページ（products.html / note-list.html / timebox.html）は
+   main.js を読み込まないため、スクロールしても .header-scrolled が付かない。
+   固定ヘッダーが透けたままだと本文が下を通って文字が重なるので、背景を最初から付けておく */
+header:not(:has(.hamburger)) {
+    background: rgba(88, 178, 220, 0.92);
+    backdrop-filter: blur(10px);
+}
+
 .logo {
     font-family: var(--font-en);
     font-size: 2rem;

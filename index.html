@@ -365,10 +365,15 @@
         const navItems = document.querySelectorAll('.side-nav-item');
         const socialSticky = document.querySelector('.social-sticky');
         const heroSection = document.getElementById('hero');
+        const mainHeader = document.getElementById('main-header');
 
         window.addEventListener('scroll', () => {
             let current = "";
             const scrollPos = window.pageYOffset;
+
+            // ヒーローの上では透過のまま、スクロールしたら背景を付ける。
+            // 付けないと固定ヘッダーの下を本文が透けて通り、文字が重なる
+            mainHeader.classList.toggle('header-scrolled', scrollPos > 20);
 
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
