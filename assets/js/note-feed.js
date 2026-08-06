@@ -68,15 +68,39 @@ const loadSavedPosts = async () => {
   throw new Error('The saved note feed was not found.');
 };
 
+/**
+ * .stagger-item は opacity:0 から始まり、.visible が付いて表示される。
+ * ページ側のIntersectionObserverは読み込み時点の要素しか監視していないため、
+ * 後から差し込むカードはここで自分で見張る（付け忘れると永久に透明のままになる）。
+ */
+const revealWhenVisible = (cards) => {
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach((card) => card.classList.add('visible'));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+  );
+  cards.forEach((card) => observer.observe(card));
+};
+
 if (containers.length) {
   loadSavedPosts()
     .then(({ posts }) => {
       if (!Array.isArray(posts) || posts.length === 0) throw new Error('No posts');
       containers.forEach((container) => {
         const limit = Number(container.dataset.noteLimit) || posts.length;
-        container.replaceChildren(
-          ...posts.slice(0, limit).map((post) => createCard(post, container.dataset.noteAnimate === 'true')),
-        );
+        const animate = container.dataset.noteAnimate === 'true';
+        const cards = posts.slice(0, limit).map((post) => createCard(post, animate));
+        container.replaceChildren(...cards);
+        if (animate) revealWhenVisible(cards);
       });
     })
     .catch((error) => {
