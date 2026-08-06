@@ -248,22 +248,36 @@ header {
 @media (max-width: 768px) {
     .desktop-nav { display: none; }
     .hamburger { display: block; }
-    
-    /* モバイル時にロゴを中央に */
-    header .container {
+
+    /* モバイル時にロゴを中央に。
+       ナビをハンバーガーへ畳むページ（index.html）だけが対象。
+       ナビを出したままのページ（products.html / note-list.html など）で中央寄せすると、
+       ロゴとナビが同じ位置に重なってしまう */
+    header .container:has(.hamburger) {
         justify-content: center;
         position: relative;
     }
-    
-    header .logo {
+
+    header .container:has(.hamburger) .logo {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     header .hamburger {
         position: absolute;
         right: 20px;
+    }
+
+    /* ハンバーガーを持たないページ: ロゴ左・ナビ右のまま、幅に収まるよう縮める
+       （ナビの gap と font-size はHTMLのstyle属性で指定されているため !important で上書きする） */
+    header .container:not(:has(.hamburger)) .logo {
+        font-size: 1.5rem;
+    }
+
+    header .container:not(:has(.hamburger)) nav {
+        gap: 16px !important;
+        font-size: 0.72rem !important;
     }
 }
 

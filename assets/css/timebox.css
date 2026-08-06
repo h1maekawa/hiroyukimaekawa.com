@@ -760,23 +760,9 @@
     padding-left: 12px;
 }
 
-/* --- Mobile header (このページはハンバーガーを持たないので調整する) --- */
+/* --- Mobile --- */
+/* ヘッダーのロゴ・ナビの縮小は main.css 側（ハンバーガーを持たないページ向けの指定）が行う */
 @media (max-width: 768px) {
-    .tb-page header .container {
-        justify-content: space-between;
-    }
-
-    .tb-page header .logo {
-        position: static;
-        transform: none;
-        font-size: 1.5rem;
-    }
-
-    .tb-page header nav {
-        gap: 16px !important;
-        font-size: 0.72rem !important;
-    }
-
     .tb-hero { padding-top: 120px; }
     .tb-card { padding: 18px; }
     .tb-timeline-scroll { height: 420px; }
