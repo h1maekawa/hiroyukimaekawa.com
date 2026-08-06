@@ -242,83 +242,27 @@
         <div class="container">
             <h2 class="section-title fade-in">つくったもの</h2>
 
-            <h3 class="fade-in" style="margin-top: 2.5rem; margin-bottom: 1.5rem; padding-left: 12px; border-left: 4px solid var(--accent-color); font-size: 1.4rem; font-family: var(--font-en); font-weight: 700;">BUSINESS / WORK</h3>
             <div class="product-grid">
                 <!-- ここにプロダクトを追加してください -->
                 <div class="product-card fade-in">
                     <div class="product-img">
-                        <div class="placeholder-img product-img-1"></div>
+                        <div class="placeholder-img" style="background: linear-gradient(135deg, #2b6cb0, #1a365d);"></div>
                     </div>
                     <div class="product-tags">
-                        <span class="tag">Next.js</span>
-                        <span class="tag">Vercel</span>
-                        <span class="tag">TailwindCSS</span>
+                        <span class="tag">Time Blocking</span>
+                        <span class="tag">Cloudflare Pages</span>
+                        <span class="tag">Public Beta</span>
                     </div>
-                    <h3 class="product-name">AI Slide Gen</h3>
-                    <p class="product-desc">プロンプトからスライド構成を自動生成するウェブアプリケーション。ビジネスの効率化を支援します。</p>
-                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
+                    <h3 class="product-name">Timebox OS</h3>
+                    <p class="product-desc">迷っているタスクを、実行する時間へ。今日やることを書き出すと、優先順位と使える時間から1日の予定を自動で組み立てます。</p>
+                    <a href="timebox.html" class="btn btn-outline" style="width: 100%; justify-content: center;">無料で使ってみる
                         →</a>
                 </div>
 
-                <div class="product-card fade-in">
-                    <div class="product-img">
-                        <div class="placeholder-img product-img-2"></div>
-                    </div>
-                    <div class="product-tags">
-                        <span class="tag">Vue.js</span>
-                        <span class="tag">Firebase</span>
-                    </div>
-                    <h3 class="product-name">Career Hub</h3>
-                    <p class="product-desc">キャリアコンサルティングの予約と履歴管理を一元化するプラットフォーム。</p>
-                    <a href="#YOUR_URL_HERE" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
-                        →</a>
-                </div>
-                <div class="product-card fade-in">
-                    <div class="product-img">
-                        <div class="placeholder-img product-img-3" style="background: linear-gradient(135deg, #2d3748, #4a5568);"></div>
-                    </div>
-                    <div class="product-tags">
-                        <span class="tag">Cloudflare Pages</span>
-                        <span class="tag">Tool</span>
-                    </div>
-                    <h3 class="product-name">Duplicate Filter</h3>
-                    <p class="product-desc">データの重複判定チェックを素早く行うためのシステム。作業の効率化を支援します。</p>
-                    <a href="https://duplicate-filter1.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
-                        →</a>
-                </div>
-                <div class="product-card fade-in">
-                    <div class="product-img">
-                        <div class="placeholder-img product-img-4" style="background: linear-gradient(135deg, #2b6cb0, #2c5282);"></div>
-                    </div>
-                    <div class="product-tags">
-                        <span class="tag">Cloudflare Pages</span>
-                        <span class="tag">Tool</span>
-                    </div>
-                    <h3 class="product-name">Google Restaurant Scrape System</h3>
-                    <p class="product-desc">Googleマップから飲食店情報を効率的に抽出・収集するスクレイピングシステム。</p>
-                    <a href="https://google-restaurant-scrapesystem.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
-                        →</a>
-                </div>
                 <!-- 追加ポイントここまで -->
             </div>
 
-            <h3 class="fade-in" style="margin-top: 4.5rem; margin-bottom: 1.5rem; padding-left: 12px; border-left: 4px solid var(--accent-color); font-size: 1.4rem; font-family: var(--font-en); font-weight: 700;">LIFE / PERSONAL</h3>
-            <div class="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
-                <div class="product-card fade-in">
-                    <div class="product-img">
-                        <div class="placeholder-img product-img-5" style="background: linear-gradient(135deg, #38a169, #2f855a);"></div>
-                    </div>
-                    <div class="product-tags">
-                        <span class="tag">Cloudflare Pages</span>
-                        <span class="tag">Personal</span>
-                    </div>
-                    <h3 class="product-name">CSV Scrape System</h3>
-                    <p class="product-desc">家計簿や生活費の管理を目的とした、CSVデータの自動抽出・整理システムです。収支管理を効率化します。</p>
-                    <a href="https://5fa20b75.csv-scrape-system.pages.dev/#setup" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width: 100%; justify-content: center;">使ってみる
-                        →</a>
-                </div>
-            </div>
-            <div style="text-align: center;">
+            <div style="text-align: center; margin-top: 3rem;">
                 <a href="products.html" class="btn">すべて見る</a>
             </div>
         </div>
@@ -421,10 +365,15 @@
         const navItems = document.querySelectorAll('.side-nav-item');
         const socialSticky = document.querySelector('.social-sticky');
         const heroSection = document.getElementById('hero');
+        const mainHeader = document.getElementById('main-header');
 
         window.addEventListener('scroll', () => {
             let current = "";
             const scrollPos = window.pageYOffset;
+
+            // ヒーローの上では透過のまま、スクロールしたら背景を付ける。
+            // 付けないと固定ヘッダーの下を本文が透けて通り、文字が重なる
+            mainHeader.classList.toggle('header-scrolled', scrollPos > 20);
 
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;

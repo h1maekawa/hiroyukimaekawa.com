@@ -1,8 +1,12 @@
 name: Sync note RSS
 
 on:
+  # noteにはwebhookがないので、こちらから定期的にRSSを見に行く。
+  # 1時間ごと（記事が増えていなければ何もコミットしないので空振りは安い）。
+  # GitHubのスケジュール実行は混雑時に数分〜十数分遅れることがある。
+  # すぐ反映したいときは Actions から手動実行する（workflow_dispatch）。
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '7 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -26,9 +30,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
+      # RSSの取り込みに関わるテストだけを走らせる。
+      # ここで `npm test` を全部回すと、記事の同期とは無関係なテストが落ちただけで
+      # 記事の更新まで止まってしまう。サイト全体のテストは ci.yml が見る。
+      - run: node --test test/note-rss.test.mjs
       - run: npm run sync:note
-      - run: npm run build
       - name: Commit updated snapshot
         run: |
           if git diff --quiet -- public/data/note-posts.json; then

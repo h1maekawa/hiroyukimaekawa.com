@@ -164,6 +164,14 @@ header {
     backdrop-filter: blur(10px);
 }
 
+/* ハンバーガーを持たないページ（products.html / note-list.html / timebox.html）は
+   main.js を読み込まないため、スクロールしても .header-scrolled が付かない。
+   固定ヘッダーが透けたままだと本文が下を通って文字が重なるので、背景を最初から付けておく */
+header:not(:has(.hamburger)) {
+    background: rgba(88, 178, 220, 0.92);
+    backdrop-filter: blur(10px);
+}
+
 .logo {
     font-family: var(--font-en);
     font-size: 2rem;
@@ -248,22 +256,36 @@ header {
 @media (max-width: 768px) {
     .desktop-nav { display: none; }
     .hamburger { display: block; }
-    
-    /* モバイル時にロゴを中央に */
-    header .container {
+
+    /* モバイル時にロゴを中央に。
+       ナビをハンバーガーへ畳むページ（index.html）だけが対象。
+       ナビを出したままのページ（products.html / note-list.html など）で中央寄せすると、
+       ロゴとナビが同じ位置に重なってしまう */
+    header .container:has(.hamburger) {
         justify-content: center;
         position: relative;
     }
-    
-    header .logo {
+
+    header .container:has(.hamburger) .logo {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     header .hamburger {
         position: absolute;
         right: 20px;
+    }
+
+    /* ハンバーガーを持たないページ: ロゴ左・ナビ右のまま、幅に収まるよう縮める
+       （ナビの gap と font-size はHTMLのstyle属性で指定されているため !important で上書きする） */
+    header .container:not(:has(.hamburger)) .logo {
+        font-size: 1.5rem;
+    }
+
+    header .container:not(:has(.hamburger)) nav {
+        gap: 16px !important;
+        font-size: 0.72rem !important;
     }
 }
 
